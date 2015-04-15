@@ -36,6 +36,7 @@ Information for ui-
 \226Project\src\main\webapp\movieapp\img\
 
 5)In case, to add new js/css component
+	
 	5.1)add it to bower.json
 	example-
 	"fontawesome": "~4.1.0"
