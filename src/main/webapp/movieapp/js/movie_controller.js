@@ -1,8 +1,8 @@
 var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource']);
 
 movieapp.run(function($rootScope) {
+	$rootScope.OnNavTabs = false;
     $rootScope.OffNavTabs = true;
-    $rootScope.OffLogoutTabs = true;
     //$rootScope.image_path = "{'background-image':'url(/movieapp/img/background_blur.jpg)'}";
     $rootScope.image_path1 = "{'background-image':'url(/movieapp/img/background_blur.jpg)'}";
 });
@@ -64,6 +64,16 @@ movieapp.config(function($routeProvider) {
 		controller : 'registerController'
 	})
 	
+	.when('/home', {
+		templateUrl : 'HomeUser.html',
+		controller : 'homeUserController'
+	})
+	
+	.when('/homeadmin', {
+		templateUrl : 'HomeAdmin.html',
+		controller : 'homeAdminController'
+	})
+	
 	.otherwise({
 		redirectTo : '/'
 	});
@@ -82,6 +92,7 @@ movieapp.controller('homeController',
 			email : $scope.loginform_email,
 			password : $scope.loginform_password
 		};
+		$location.url('/home');
 		/*var response = $http.post("../../api/v1/users", data,
 				{});
 		response
@@ -116,6 +127,8 @@ movieapp.controller('homeController',
 movieapp.controller('registerController',
 			function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
 	console.log('registerController start');
+	$rootScope.OnNavTabs = false;
+    $rootScope.OffNavTabs = true;
 	
 	$scope.signupform_signup = function(item, event) {
 		console.log("--> Submitting form "
@@ -162,3 +175,22 @@ movieapp.controller('registerController',
 	console.log('registerController end');
 });
 
+
+movieapp.controller('homeUserController',
+			function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('homeUserController start');
+	$rootScope.OnNavTabs = true;
+    $rootScope.OffNavTabs = false;
+	
+	
+	console.log('homeUserController end');
+});
+
+movieapp.controller('homeAdminController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('homeAdminController start');
+	$rootScope.OnNavTabs = true;
+    $rootScope.OffNavTabs = false;
+	
+	console.log('homeAdminController end');
+});
