@@ -1,5 +1,61 @@
-<div style="padding-top:100px;">
-Admin Home page.
-Admin can add, delete and update movie.
-Admin can serach movie using all criteria.
+<div ng-controller="homeAdminController">
+	
+	<div style="text-align:center; padding-top:100px;">
+	
+		<div class="col-md-12">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-8">
+				<div class="col-md-3">
+					<input type="Search" class="form-control" placeholder="Search"
+					ng-model="serach" name="search_text" size="50" ng-model="search_text" required>
+				</div>
+				<div class="col-md-1">
+					<label for="serachCriteria"> By </label> 
+				</div>
+				<div class="col-md-4">
+					<select
+						id="serachCriteria" class="form-control" data-role="listview"
+						ng-model="serachCriteria" ng-change="">
+						<option value="">Select Search Criteria</option>
+						<option value="1">Criteria 1</option>
+						<option value="2">Criteria 2</option>
+						<option value="3">Criteria 3</option>
+						<option value="4">Criteria 4</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-1">
+			</div>
+		</div>
+		
+	
+	</div>
+	<div style="text-align:center;">
+		<div class="col-md-12" style="padding-top:20px;">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-3">
+				<button class="btn btn-lg btn-default btn-block" type="button" ng-click="searchMovie()">Search</button>
+			</div>
+			<div class="col-md-5">
+			</div>
+		</div>
+	</div>
+	<div style="text-align:center; padding-top:40px;">
+		<div class="col-md-12" style="padding-top:40px;">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="col-md-10">
+					<button class="btn btn-lg btn-default btn-block" type="button" ng-click="addMovieLink()">Add Movie</button>
+				</div>
+				<div class="col-md-1">
+				</div>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+	</div>
+
 </div>

@@ -15,11 +15,12 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#/" ng-hide="OnNavTabs">Login</a></li>
-						<li><a href="#home" ng-hide="OffNavTabs">Home</a></li>
+						<li><a href="#/" ng-hide="hideStaticTabs">Login</a></li>
+						<li><a href="#home" ng-hide="hideUserNavTabs">Home</a></li>
+						<li><a href="#homeadmin" ng-hide="hideAdminNavTabs">Home</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#logout" ng-hide="OffNavTabs">Logout</a></li>
+						<li><a href="#logout" ng-hide="(hideUserNavTabs or hideAdminNavTabs)">Logout</a></li>
 					</ul>
 				</div>
 				

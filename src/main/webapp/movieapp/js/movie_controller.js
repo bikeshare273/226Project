@@ -1,8 +1,9 @@
-var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource']);
+var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource', 'smart-table' ]);
 
 movieapp.run(function($rootScope) {
-	$rootScope.OnNavTabs = false;
-    $rootScope.OffNavTabs = true;
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = false;
+    $rootScope.hideAdminNavTabs = true;
     //$rootScope.image_path = "{'background-image':'url(/movieapp/img/background_blur.jpg)'}";
     $rootScope.image_path1 = "{'background-image':'url(/movieapp/img/background_blur.jpg)'}";
 });
@@ -74,6 +75,26 @@ movieapp.config(function($routeProvider) {
 		controller : 'homeAdminController'
 	})
 	
+	.when('/addMovie', {
+		templateUrl : 'addmovie.html',
+		controller : 'addMovieController'
+	})
+	
+	.when('/adminMovieSearch', {
+		templateUrl : 'adminMovieSearchResult.html',
+		controller : 'adminMovieSearchController'
+	})
+	
+	.when('/deleteMovie', {
+		templateUrl : 'deleteMovie.html',
+		controller : 'deleteMovieController'
+	})
+	
+	.when('/updateMovie', {
+		templateUrl : 'updateMovie.html',
+		controller : 'updateMovieController'
+	})
+	
 	.otherwise({
 		redirectTo : '/'
 	});
@@ -82,6 +103,9 @@ movieapp.config(function($routeProvider) {
 movieapp.controller('homeController',
 	 				function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
 	console.log('homeController start');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = false;
+    $rootScope.hideAdminNavTabs = true;
 	
 	$scope.loginform_login = function(item, event) {
 		console.log("--> Submitting form "
@@ -93,6 +117,7 @@ movieapp.controller('homeController',
 			password : $scope.loginform_password
 		};
 		$location.url('/home');
+		//$location.url('/homeadmin');
 		/*var response = $http.post("../../api/v1/users", data,
 				{});
 		response
@@ -127,8 +152,9 @@ movieapp.controller('homeController',
 movieapp.controller('registerController',
 			function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
 	console.log('registerController start');
-	$rootScope.OnNavTabs = false;
-    $rootScope.OffNavTabs = true;
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = false;
+    $rootScope.hideAdminNavTabs = true;
 	
 	$scope.signupform_signup = function(item, event) {
 		console.log("--> Submitting form "
@@ -179,9 +205,9 @@ movieapp.controller('registerController',
 movieapp.controller('homeUserController',
 			function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
 	console.log('homeUserController start');
-	$rootScope.OnNavTabs = true;
-    $rootScope.OffNavTabs = false;
-	
+	$rootScope.hideUserNavTabs = false;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = true;
 	
 	console.log('homeUserController end');
 });
@@ -189,8 +215,152 @@ movieapp.controller('homeUserController',
 movieapp.controller('homeAdminController',
 		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
 	console.log('homeAdminController start');
-	$rootScope.OnNavTabs = true;
-    $rootScope.OffNavTabs = false;
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = false;
+    
+
+    $scope.searchMovie = function(item, event) {
+		console.log("--> Submitting searching form "
+				+ $scope.serach + " "
+				+ $scope.serachCriteria);
+		console.log("--> Submitting form ");
+		var data = {
+			search : $scope.signupform_name,
+			serachCriteria : $scope.signupform_email
+		};
+		$location.url('/adminMovieSearch');
+	};
+	
+	$scope.addMovieLink = function(item, event) {
+		$location.url('/addMovie');
+	};
 	
 	console.log('homeAdminController end');
+});
+
+movieapp.controller('addMovieController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('addMovieController start');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = false;
+    
+
+    $scope.movieaddform_addMovie = function(item, event) {
+		console.log("--> Submitting searching form "
+				+ $scope.serach + " "
+				+ $scope.serachCriteria);
+		console.log("--> Submitting form ");
+		var data = {
+			search : $scope.signupform_name,
+			serachCriteria : $scope.signupform_email
+		};
+		$scope.movieaddform_success = "Movie Added Successfully";
+	};
+	
+	console.log('addMovieController end');
+});
+
+movieapp.controller('adminMovieSearchController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('adminMovieSearchController start');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = false;
+    
+
+    $scope.queue = {
+        transactions: []
+    };
+    
+    var dataFromServer = new Array();
+    for (var i = 0; i < 10; i++) {
+    	dataFromServer[i] = {
+    		id:i,
+    		movieid: "10",
+    		category: "3",
+    		name:"piku",
+    		actors:"abc, def",
+    		description:"A cab driver (Irrfan Khan) is caught between a dysfunctional father (Amitabh Bachchan) and daughter (Deepika Padukone) as he drives them to Calcutta."
+    	};
+        $scope.queue.transactions.push(dataFromServer[i]);
+    }
+    $scope.itemsByPage=4;
+    
+    $scope.deleteMovie = function(movieid) {
+		console.log("--> Submitting form "
+				+ movieid);
+		for(var i = 0; i < 10; i++){
+			if(dataFromServer[i].movieid == movieid){
+				dataSharing.set(dataFromServer[i]);
+			}
+		}
+		$location.url('/deleteMovie');
+    };
+    
+    $scope.updateMovie = function(movieid) {
+		console.log("--> Submitting form "
+				+ movieid);
+		for(var i = 0; i < 10; i++){
+			if(dataFromServer[i].movieid == movieid){
+				dataSharing.set(dataFromServer[i]);
+			}
+		}
+		$location.url('/updateMovie');
+    };
+	
+	console.log('adminMovieSearchController end');
+});
+
+movieapp.controller('deleteMovieController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('deleteMovieController start');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = false;
+    
+    $scope.moviedeleteform_movieid = dataSharing.get().movieid;
+    $scope.moviedeleteform_movieCategory = dataSharing.get().category;
+    $scope.moviedeleteform_moviename = dataSharing.get().name;
+    $scope.moviedeleteform_moviedescription = dataSharing.get().description;
+    $scope.moviedeleteform_actors = dataSharing.get().actors;
+
+    $scope.moviedeleteform_deleteMovie = function() {
+		console.log("--> Submitting deleteMovie form "
+				+ $scope.moviedeleteform_movieid);
+		console.log("--> Submitting form ");
+		var data = {
+			movieid : $scope.moviedeleteform_movieid
+		};
+		$scope.moviedeleteform_success = "Movie Deleted Successfully";
+	};
+	
+	console.log('deleteMovieController end');
+});
+
+movieapp.controller('updateMovieController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('updateMovieController start');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = false;
+    
+    $scope.movieupdateform_movieid = dataSharing.get().movieid;
+    $scope.movieupdateform_movieCategory = dataSharing.get().category;
+    $scope.movieupdateform_moviename = dataSharing.get().name;
+    $scope.movieupdateform_moviedescription = dataSharing.get().description;
+    $scope.movieupdateform_actors = dataSharing.get().actors;
+
+    $scope.movieupdateform_updateMovie = function() {
+		console.log("--> Submitting updateMovie form "
+				+ $scope.movieupdateform_movieid);
+		console.log("--> Submitting form ");
+		var data = {
+			movieid : $scope.movieupdateform_movieid
+		};
+		$scope.movieupdateform_success = "Movie Updated Successfully";
+	};
+	
+	console.log('updateMovieController end');
 });
