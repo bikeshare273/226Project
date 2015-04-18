@@ -1,0 +1,136 @@
+<div class="container-fluid signup_container" ng-controller="updateUserController">
+	
+	<div style="text-align:center; color: black; font-size: 25px; padding-bottom: 5px; padding-top: 5px;">
+	Update Your Details !!!!
+	</div>
+	
+	<div class="col-md-12">
+		
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<form name="updateuserform">
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="email" class="form-control" placeholder="{{updateuserform_email_old}}"
+								name="updateuserform_email" size="50" ng-model="updateuserform_email" 
+								disabled>
+					
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="password" class="form-control" placeholder="Old Password" name="updateuserform_oldpassword"
+						ng-minlength="5" size="50" ng-model="updateuserform_oldpassword" required>
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_oldpassword.$dirty && updateuserform.updateuserform_oldpassword.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_oldpassword.$error.required">Old Password is required</small> 
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_oldpassword.$error.minlength">Old Password must be atleast 5 character</small> 
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="password" class="form-control" placeholder="Password" name="updateuserform_password"
+						ng-minlength="5" size="50" ng-model="updateuserform_password" required>
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_password.$dirty && updateuserform.updateuserform_password.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_password.$error.required">Password is required</small> 
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_password.$error.minlength">Password must be atleast 5 character</small> 
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="password" class="form-control" placeholder="Confirm Password" name="updateuserform_confirmpassword"
+						size="50" ng-model="updateuserform_confirmpassword" required password-match="updateuserform_password">
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_confirmpassword.$dirty && updateuserform.updateuserform_confirmpassword.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_confirmpassword.$error.required">Confirm Password is required</small> </br>
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_confirmpassword.$error.unique">Passwords do not match</small> 
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="text" class="form-control" placeholder="{{updateuserform_phone_old}}" name="updateuserform_phone" 
+						size="50" ng-model="updateuserform_phone" ng-minlength="10" ng-maxlength="10" required>
+					
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_phone.$dirty && updateuserform.updateuserform_phone.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_phone.$error.required">Phone number is required</small> 
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_phone.$error.minlength">Phone number is invalid</small>
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_phone.$error.maxlength">Phone number is invalid</small>
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="text" class="form-control" placeholder="{{updateuserform_address_old}}" name="updateuserform_address" 
+						size="50" ng-model="updateuserform_address" required>
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_address.$dirty && updateuserform.updateuserform_address.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_address.$error.required">Address is required</small> 
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="text" class="form-control" placeholder="{{updateuserform_city_old}}" name="updateuserform_city" 
+						size="50" ng-model="updateuserform_city" required>
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_city.$dirty && updateuserform.updateuserform_city.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_city.$error.required">City is required</small> 
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="text" class="form-control" placeholder="{{updateuserform_state_old}}" name="updateuserform_state" 
+						size="50" ng-model="updateuserform_state" required>
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_state.$dirty && updateuserform.updateuserform_state.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_state.$error.required">State is required</small> 
+					</div>
+				</div>
+				
+				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="text" class="form-control" placeholder="{{updateuserform_country_old}}" name="updateuserform_country" 
+						size="50" ng-model="updateuserform_country" required>
+						
+					<div class="error-container"
+						ng-show="updateuserform.updateuserform_country.$dirty && updateuserform.updateuserform_country.$invalid">
+							<small class="errorbox"
+							ng-show="updateuserform.updateuserform_country.$error.required">Country is required</small> 
+					</div>
+				</div>
+				
+				<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="updateuserform_updateUser()">Update</button>
+					</span>
+				</div>
+				
+				<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
+					<div class="errorbox" style="position:relative;padding-top:1%;padding-left:47%;">
+					<ul>
+						<li ng-repeat="error in updateuserform_error">{{ error }}</li>
+					</ul>
+					</div>
+					<div class="successbox" style="position:relative;padding-top:1%;padding-left:47%;">{{updateuserform_success}}</div>
+				</div>
+				
+			</form>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>
