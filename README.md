@@ -1,7 +1,7 @@
 
 
 Starting point of Application(UI)
-localhost:8080/movieapp/index.html
+localhost:8082/movieapp/index.html
 
 =====================================
 
