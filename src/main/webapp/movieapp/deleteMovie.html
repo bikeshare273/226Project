@@ -1,0 +1,97 @@
+<div ng-controller="addMovieController">
+	<div style="text-align:center; color: black; font-size: 25px; padding-bottom: 5px; padding-top: 60px;">
+	Delete Movie
+	</div>
+	
+	<div class="col-md-12">
+		<form name="moviedeleteform">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Movie Name</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="{{$moviedeleteform_moviename}}" name="moviedeleteform_moviename" 
+								size="50" ng-model="moviedeleteform_moviename" disabled/>
+								
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviedescription>Movie Description</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<textarea name="moviedeleteform_moviedescription" id="moviedeleteform_moviedescription" class="form-control" rows="4" placeholder="{{$moviedeleteform_moviedescription}}" ng-model="moviedeleteform_moviedescription" disabled>
+							</textarea>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviecategory>Movie Category</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<!-- <select
+								id="movieCategory" class="form-control" data-role="listview"
+								ng-model="movieCategory" disabled>
+								<option value="{{$moviedeleteform_movieCategory}}">{{$moviedeleteform_movieCategory}}</option>
+							</select> -->
+							<input type="text" class="form-control" placeholder="{{$moviedeleteform_movieCategory}}" name="moviedeleteform_movieCategory" 
+								size="50" ng-model="moviedeleteform_movieCategory" disabled/>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Actors</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="{{$moviedeleteform_actors}}" name="moviedeleteform_actors" 
+								size="50" ng-model="moviedeleteform_actors" disabled/>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+						<button class="btn btn-default btn-block" type="button" ng-click="moviedeleteform_deleteMovie()">Delete Movie</button>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+				<div>
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+						<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
+							<div class="errorbox" >
+							<ul>
+								<li ng-repeat="error in moviedeleteform_error">{{ error }}</li>
+							</ul>
+							</div>
+							<div class="successbox">{{moviedeleteform_success}}</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</form>
+	</div>
+</div>

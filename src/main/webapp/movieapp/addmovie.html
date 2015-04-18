@@ -1,0 +1,121 @@
+<div ng-controller="addMovieController">
+	<div style="text-align:center; color: black; font-size: 25px; padding-bottom: 5px; padding-top: 60px;">
+	Add Movie
+	</div>
+	
+	<div class="col-md-12">
+		<form name="movieaddform">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Movie Name</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="" name="movieaddform_moviename" 
+								size="50" ng-model="movieaddform_moviename" required/>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_moviename.$dirty && movieaddform.movieaddform_moviename.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_moviename.$error.required">Movie Name is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviedescription>Movie Description</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<textarea name="movieaddform_moviedescription" id="movieaddform_moviedescription" class="form-control" rows="4" placeholder="Your message" ng-model="movieaddform_moviedescription" required>
+							</textarea>
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_moviedescription.$dirty && movieaddform.movieaddform_moviedescription.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_moviedescription.$error.required">Movie Description is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviecategory>Movie Category</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<select
+								id="movieCategory" class="form-control" data-role="listview"
+								ng-model="movieCategory" ng-change="" required>
+								<option value="">Select Movie Category</option>
+								<option value="1">Category 1</option>
+								<option value="2">Category 2</option>
+								<option value="3">Category 3</option>
+								<option value="4">Category 4</option>
+							</select>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_moviecategory.$dirty && movieaddform.movieaddform_moviecategory.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_moviecategory.$error.required">Movie Category is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Actors</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="Comma-Separated Actors Name" name="movieaddform_actors" 
+								size="50" ng-model="movieaddform_actors" required/>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_actors.$dirty && movieaddform.movieaddform_actors.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_actors.$error.required">Actors are required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+						<button class="btn btn-default btn-block" type="button" ng-click="movieaddform_addMovie()">Add Movie</button>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+				<div>
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+						<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
+							<div class="errorbox" >
+							<ul>
+								<li ng-repeat="error in movieaddform_error">{{ error }}</li>
+							</ul>
+							</div>
+							<div class="successbox">{{movieaddform_success}}</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</form>
+	</div>
+</div>

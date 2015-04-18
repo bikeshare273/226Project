@@ -1,0 +1,133 @@
+<div ng-controller="addMovieController">
+	<div style="text-align:center; color: black; font-size: 25px; padding-bottom: 5px; padding-top: 60px;">
+	Update Movie
+	</div>
+	
+	<div class="col-md-12">
+		<form name="movieupdateform">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Movie Name</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="{{$movieupdateform_moviename}}" name="movieupdateform_moviename" 
+								size="50" ng-model="movieupdateform_moviename" required/>
+								
+							<div class="error-container"
+								ng-show="movieupdateform.movieupdateform_moviename.$dirty && movieupdateform.movieupdateform_moviename.$invalid">
+									<small class="errorbox"
+									ng-show="movieupdateform.movieupdateform_moviename.$error.required">Movie Name is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviedescription>Movie Description</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<textarea name="movieupdateform_moviedescription" id="movieupdateform_moviedescription" class="form-control" rows="4" placeholder="{{$movieupdateform_moviedescription}}" ng-model="movieupdateform_moviedescription" required>
+							</textarea>
+							<div class="error-container"
+								ng-show="movieupdateform.movieupdateform_moviedescription.$dirty && movieupdateform.movieupdateform_moviedescription.$invalid">
+									<small class="errorbox"
+									ng-show="movieupdateform.movieupdateform_moviedescription.$error.required">Movie Description is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviecategory>Movie Category</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<select
+								id="movieCategory" name="movieCategory" class="form-control" data-role="listview"
+								ng-model="movieCategory" ng-change="" required>
+								<option value="">Select Movie Category</option>
+								 <option 
+						           	ng-show="movieupdateform_movieCategory == '1'" value="1" selected>Category 1</option>
+						         <option 
+						           	ng-show="movieupdateform_movieCategory != '1'" value="1">Category 1</option>
+					           	 <option 
+						           	ng-show="movieupdateform_movieCategory == '2'" value="2" selected>Category 2</option>
+						         <option 
+						           	ng-show="movieupdateform_movieCategory != '2'" value="2">Category 2</option>
+						         <option 
+						           	ng-show="movieupdateform_movieCategory == '3'" value="3" selected>Category 3</option>
+						         <option 
+						           	ng-show="movieupdateform_movieCategory != '3'" value="3">Category 3</option>
+						         <option 
+						           	ng-show="movieupdateform_movieCategory == '4'" value="4" selected>Category 4</option>
+						         <option 
+						           	ng-show="movieupdateform_movieCategory != '4'" value="4">Category 4</option>
+							</select>
+								
+							<div class="error-container"
+								ng-show="movieupdateform.movieupdateform_moviecategory.$dirty && movieupdateform.movieupdateform_moviecategory.$invalid">
+									<small class="errorbox"
+									ng-show="movieupdateform.movieupdateform_moviecategory.$error.required">Movie Category is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Actors</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="{{$movieupdateform_actors}}" name="movieupdateform_actors" 
+								size="50" ng-model="movieupdateform_actors" required/>
+								
+							<div class="error-container"
+								ng-show="movieupdateform.movieupdateform_actors.$dirty && movieupdateform.movieupdateform_actors.$invalid">
+									<small class="errorbox"
+									ng-show="movieupdateform.movieupdateform_actors.$error.required">Actors are required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+						<button class="btn btn-default btn-block" type="button" ng-click="movieupdateform_updateMovie()">Update Movie</button>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+				<div>
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+						<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
+							<div class="errorbox" >
+							<ul>
+								<li ng-repeat="error in movieupdateform_error">{{ error }}</li>
+							</ul>
+							</div>
+							<div class="successbox">{{movieupdateform_success}}</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</form>
+	</div>
+</div>
