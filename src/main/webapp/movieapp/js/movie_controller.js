@@ -95,6 +95,11 @@ movieapp.config(function($routeProvider) {
 		controller : 'updateMovieController'
 	})
 	
+	.when('/profile', {
+		templateUrl : 'updateUser.html',
+		controller : 'updateUserController'
+	})
+	
 	.otherwise({
 		redirectTo : '/'
 	});
@@ -364,3 +369,40 @@ movieapp.controller('updateMovieController',
 	
 	console.log('updateMovieController end');
 });
+
+movieapp.controller('updateUserController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('updateUserController start');
+	$rootScope.hideUserNavTabs = false;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = true;
+    
+    //get here to obtain user data
+    $scope.updateuserform_email_old = "xyz@abc.net";
+    $scope.updateuserform_phone_old = "000-000-0000";
+    $scope.updateuserform_address_old = "#17, xyz, 123";
+    $scope.updateuserform_city_old = "San Jose";
+    $scope.updateuserform_state_old = "California";
+    $scope.updateuserform_country_old = "USA";
+    
+    $scope.updateuserform_updateUser = function() {
+    	console.log("--> Submitting form "
+				+ $scope.updateuserform_email + " "
+				+ $scope.updateuserform_password);
+		console.log("--> Submitting form "
+				+ $scope.updateuserform_phone + " "
+				+ $scope.updateuserform_address);
+		console.log("--> Submitting form "
+				+ $scope.updateuserform_city + " "
+				+ $scope.updateuserform_state+" "
+				+ $scope.updateuserform_country);
+		console.log("--> Submitting form ");
+		var data = {
+			movieid : $scope.movieupdateform_movieid
+		};
+		$scope.movieupdateform_success = "User Details Updated Successfully";
+	};
+	
+	console.log('updateUserController end');
+});
+
