@@ -100,6 +100,11 @@ movieapp.config(function($routeProvider) {
 		controller : 'updateUserController'
 	})
 	
+	.when('/movieSearch', {
+		templateUrl : 'movieSearchResult.html',
+		controller : 'serachMovieController'
+	})
+	
 	.otherwise({
 		redirectTo : '/'
 	});
@@ -231,8 +236,8 @@ movieapp.controller('homeAdminController',
 				+ $scope.serachCriteria);
 		console.log("--> Submitting form ");
 		var data = {
-			search : $scope.signupform_name,
-			serachCriteria : $scope.signupform_email
+			search : $scope.serach,
+			serachCriteria : $scope.serachCriteria
 		};
 		$location.url('/adminMovieSearch');
 	};
@@ -404,5 +409,56 @@ movieapp.controller('updateUserController',
 	};
 	
 	console.log('updateUserController end');
+});
+
+
+movieapp.controller('serachMovieController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('serachMovieController start');
+	$rootScope.hideUserNavTabs = false;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = true;
+    
+    $scope.movieSearch = function(item, event) {
+		console.log("--> Submitting searching form "
+				+ $scope.serach + " "
+				+ $scope.serachCriteria);
+		console.log("--> Submitting form ");
+		var data = {
+			search : $scope.serach,
+			serachCriteria : $scope.serachCriteria
+		};
+		$location.url('/movieSearch');
+	};
+	
+	console.log('serachMovieController end');
+});
+
+movieapp.controller('movieSearchResultController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('movieSearchResultController start');
+	$rootScope.hideUserNavTabs = false;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = true;
+    
+    $scope.queue = {
+        transactions: []
+    };
+    
+    var dataFromServer = new Array();
+    for (var i = 0; i < 100; i++) {
+    	dataFromServer[i] = {
+    		id:i,
+    		movieid: "10",
+    		category: "3",
+    		name:"piku",
+    		actors:"abc, def",
+    		description:"A cab driver (Irrfan Khan) is caught between a dysfunctional father (Amitabh Bachchan) and daughter (Deepika Padukone) as he drives them to Calcutta."
+    	};
+        $scope.queue.transactions.push(dataFromServer[i]);
+    }
+    $scope.itemsByPage=6;
+	
+	console.log('movieSearchResultController end');
 });
 

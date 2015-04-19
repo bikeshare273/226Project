@@ -1,5 +1,69 @@
-<div style="padding-top:100px;">
-User Home page.
-List of movies recommended for user going to appear here.
-User can search movie based on various criteria.
+
+<div ng-controller="serachMovieController">
+
+	<div style="padding-top:70px;">
+		<div class="col-md-12 col-md-push-3">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-8">
+					<div class="col-md-4">
+						<input type="Search" class="form-control" placeholder="Search" 
+						ng-model="serach" name="search_text" size="50" ng-model="search_text" required>
+					</div>
+					<div class="col-md-1">
+						<label for="serachCriteria"> By </label> 
+					</div>
+					<div class="col-md-4">
+						<select
+							id="serachCriteria" class="form-control" data-role="listview"
+							ng-model="serachCriteria" ng-change="">
+							<option value="">Select Search Criteria</option>
+							<option value="1">Criteria 1</option>
+							<option value="2">Criteria 2</option>
+							<option value="3">Criteria 3</option>
+							<option value="4">Criteria 4</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-1">
+				</div>
+			</div>
+	</div>
+	
+	<div style="">
+		<div class="col-md-12 col-md-push-3" style="padding-top:20px;">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-3">
+				<button class="btn btn-lg btn-default btn-block"  type="button" ng-click="movieSearch()">Search</button>
+			</div>
+			<div class="col-md-5">
+			</div>
+		</div>
+	</div>
+	
+	<div style="padding-top:160px;">
+		<div class="col-md-12">
+			<div class="col-md-2" style="">
+				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-md-2" style="">
+				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-md-2" style="">
+				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-md-2" style="">
+				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-md-2" style="">
+				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-md-2" style="">
+				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+		</div>
+	
+	</div>
+
 </div>
