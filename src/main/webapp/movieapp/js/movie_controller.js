@@ -105,6 +105,11 @@ movieapp.config(function($routeProvider) {
 		controller : 'serachMovieController'
 	})
 	
+	.when('/playMovie', {
+		templateUrl : 'playMovie.html',
+		controller : 'playMovieController'
+	})
+	
 	.otherwise({
 		redirectTo : '/'
 	});
@@ -453,12 +458,80 @@ movieapp.controller('movieSearchResultController',
     		category: "3",
     		name:"piku",
     		actors:"abc, def",
+    		rating: "5",
     		description:"A cab driver (Irrfan Khan) is caught between a dysfunctional father (Amitabh Bachchan) and daughter (Deepika Padukone) as he drives them to Calcutta."
     	};
         $scope.queue.transactions.push(dataFromServer[i]);
     }
     $scope.itemsByPage=6;
+    
+    $scope.playMovie = function(movieid) {
+		console.log("--> Submitting searching form "
+				+ movieid);
+		console.log("--> Submitting form ");
+		for(var i = 0; i < 10; i++){
+			if(dataFromServer[i].movieid == movieid){
+				dataSharing.set(dataFromServer[i]);
+			}
+		}
+		$location.url('/playMovie');
+	};
 	
 	console.log('movieSearchResultController end');
 });
 
+
+movieapp.controller('playMovieController',
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+	console.log('playMovieController start');
+	$rootScope.hideUserNavTabs = false;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = true;
+    
+    $scope.movie_name = dataSharing.get().name;
+    $scope.movie_description = dataSharing.get().description;
+    $scope.movie_category = dataSharing.get().category;
+    $scope.movie_actors = dataSharing.get().actors;
+    $scope.movie_rating = dataSharing.get().rating;
+    $scope.movie_id = dataSharing.get().movieid;
+    
+    //all stars empty first
+    var selectedStars = 0;
+    $scope.starclassname={}
+    for(var i=1; i < 6; i++){
+		$scope.starclassname[i] = "glyphicon glyphicon-star-empty";
+	}
+	//after clicking on stars
+    $scope.clickedStar = function(startid) {
+    	selectedStars = 0;
+    	for(var i=0; i<6; i++){
+    		if(i <= starid){
+    			selectedStars++;
+    			$scope.starclassname[i] = "glyphicon glyphicon-star";
+    		}else{
+    			$scope.starclassname[i] = "glyphicon glyphicon-star-empty";
+    		}
+    	}
+    };
+    
+    //post comment
+    $scope.postComment = function() {
+    	
+    };
+    
+    //load comments
+    $scope.queue = {
+        transactions: []
+    };
+    
+    var dataFromServer = new Array();
+    for (var i = 0; i < 100; i++) {
+    	dataFromServer[i] = {
+    		comment:"The film proves that good clean and neat comedy without any cheap and vulgar dialogs or gestures is definitely more entertaining and enjoyable."
+    	};
+        $scope.queue.transactions.push(dataFromServer[i]);
+    }
+    $scope.itemsByPage=6;
+    
+	console.log('playMovieController end');
+});

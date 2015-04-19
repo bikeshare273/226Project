@@ -1,0 +1,117 @@
+<div ng-controller="playMovieController" style="padding-top:80px">
+	<div class="col-md-12">
+		<div class="col-md-7">
+			<div class="col-md-12">
+				<img class="featurette-image img-responsive center-block" style="height: 400px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			
+			<div class="col-md-12" style="padding-top:20px;">
+				<div class="col-md-4" style="font-weight: bold;">
+				Rating:    
+					<a href="" ng-click="clickedStar(1)" style="padding-left:10px;">
+						<span class="{{starclassname[1]}}" style="font-size: 20px;"></span>
+					</a>
+					<a href="" ng-click="clickedStar(2)" >
+						<span class="{{starclassname[2]}}" style="font-size: 20px;"></span>
+					</a>
+					<a href="" ng-click="clickedStar(3)" >
+						<span class="{{starclassname[3]}}" style="font-size: 20px;"></span>
+					</a>
+					<a href="" ng-click="clickedStar(4)" >
+						<span class="{{starclassname[4]}}" style="font-size: 20px;"></span>
+					</a>
+					<a href="" ng-click="clickedStar(5)" >
+						<span class="{{starclassname[5]}}" style="font-size: 20px;"></span>
+					</a>
+				</div>
+				<div class="col-md-8">
+					
+				</div>
+			</div>
+			
+			<div class="col-md-12"  style="padding-top:50px; padding-bottom:10px;">
+				<textarea name="usercomment" id="usercomment" class="form-control" rows="4" placeholder="Comment" ng-model="usercomment">
+				</textarea>
+			</div>
+			
+			<div class="col-md-12"  style="padding-top:10px; padding-bottom:20px;">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<button class="btn btn-default btn-block" type="button" ng-click="">Post</button>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			
+			<div class="col-md-12"  style="padding-top:10px; padding-bottom:10px;">
+				<span style="font-size: 14; font-weight: bold">Comments by others :</span>
+			</div>
+			
+			<div class="col-md-12"  style="padding-top:10px; padding-bottom:100px;">
+				<table st-safe-src="queue.transactions" st-table="emptyArray" class="table table-striped" >
+					<thead>
+					<tr >
+						<th style=""></th>
+					</tr>
+					</thead>
+					<tbody ng-hide="isLoading">
+					
+						<tr ng-repeat="row in emptyArray track by $index">
+							<td >{{row.comment}}</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="5" class="text-center">
+								<div st-pagination="" st-items-by-page="itemsByPage" ></div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			
+		</div>
+		<div class="col-md-5">
+			<div class="col-md-12">
+				<div class="col-md-4" style="font-weight: bold">
+					Name :
+				</div>
+				<div class="col-md-8">
+					{{movie_name}}
+				</div>
+			</div>
+			<div class="col-md-12" style="padding-top:10px;">
+				<div class="col-md-4" style="font-weight: bold">
+					Description :
+				</div>
+				<div class="col-md-8">
+					{{movie_description}}
+				</div>
+			</div>
+			<div class="col-md-12" style="padding-top:10px;">
+				<div class="col-md-4" style="font-weight: bold">
+					Category :
+				</div>
+				<div class="col-md-8">
+					{{movie_category}}
+				</div>
+			</div>
+			<div class="col-md-12" style="padding-top:10px;">
+				<div class="col-md-4" style="font-weight: bold">
+					Actors :
+				</div>
+				<div class="col-md-8">
+					{{movie_actors}}
+				</div>
+			</div>
+			<div class="col-md-12" style="padding-top:10px;">
+				<div class="col-md-4" style="font-weight: bold">
+					Rating :
+				</div> 
+				<div class="col-md-8">
+					{{movie_rating}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include src="'footer.html'"></div>
