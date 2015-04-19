@@ -502,7 +502,7 @@ movieapp.controller('playMovieController',
 		$scope.starclassname[i] = "glyphicon glyphicon-star-empty";
 	}
 	//after clicking on stars
-    $scope.clickedStar = function(startid) {
+    $scope.clickedStar = function(starid) {
     	selectedStars = 0;
     	for(var i=0; i<6; i++){
     		if(i <= starid){
