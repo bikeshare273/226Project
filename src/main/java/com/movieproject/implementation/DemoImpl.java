@@ -1,6 +1,6 @@
 package com.movieproject.implementation;
 
-import com.movieproject.interfaces.DemoInterface;
+import com.movieproject.dao.interfaces.DemoInterface;
 
 public class DemoImpl implements DemoInterface{
 
