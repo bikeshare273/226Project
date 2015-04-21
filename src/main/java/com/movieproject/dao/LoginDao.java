@@ -2,6 +2,8 @@ package com.movieproject.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
@@ -9,6 +11,7 @@ import com.movieproject.dao.interfaces.IDaoInterfaceForLogin;
 import com.movieproject.entities.Comment;
 import com.movieproject.entities.Login;
 
+@Transactional
 public class LoginDao implements IDaoInterfaceForLogin {
 
 	@Autowired

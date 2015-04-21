@@ -40,7 +40,7 @@ public class UserImpl {
 		
 		Integer userid = movieAppUtils.generateIdValue(1000);
 		userObject.setUserid(userid);
-		userObject.setEmail(user.getUsername());
+		//userObject.setEmail(user.getUsername());
 
 		loginObject.setUserid(userid);
 		loginObject.setUsername(user.getUsername());
