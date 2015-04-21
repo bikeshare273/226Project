@@ -184,15 +184,16 @@ movieapp.controller('registerController',
 				+ $scope.signupform_country);
 		console.log("--> Submitting form ");
 		var data = {
-			name : $scope.signupform_name,
+			//name : $scope.signupform_name,
 			email : $scope.signupform_email,
-			phone : $scope.signupform_phone,
-			address : $scope.signupform_address,
+			mobile_number : $scope.signupform_phone,
+			password: $scope.signupform_password,
+			//address : $scope.signupform_address,
 			city : $scope.signupform_city,
 			state : $scope.signupform_state,
 			country : $scope.signupform_country
 		};
-		/*var response = $http.post("../../api/v1/users", data,
+		var response = $http.post("../../api/v1/users", data,
 				{});
 		response
 				.success(function(dataFromServer, status,
@@ -211,7 +212,7 @@ movieapp.controller('registerController',
 				$location.url('/');
 				return $q.reject(response);
 			}
-		});*/
+		});
 	};
 	console.log('registerController end');
 });

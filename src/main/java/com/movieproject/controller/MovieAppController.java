@@ -93,7 +93,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(sessionValidatorInterceptor).addPathPatterns("/api/v1/users/*");
+        //registry.addInterceptor(sessionValidatorInterceptor).addPathPatterns("/api/v1/users/*");
         registry.addInterceptor(sessionValidatorInterceptor).addPathPatterns("/api/v1/loggedin");
     }
 	
@@ -138,7 +138,6 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	@ResponseBody
 	public UserDTO createUser(@Valid @RequestBody UserDTO user) {
-				
 		return userImpl.createUser(user);
 	}
 	
