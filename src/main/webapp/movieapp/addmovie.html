@@ -127,6 +127,46 @@
 					</div>
 				</div>
 				
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Relased Year</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="Relased Year" name="movieaddform_Movie_Year" 
+								size="50" ng-model="movieaddform_Movie_Year" required/>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_Movie_Year.$dirty && movieaddform.movieaddform_Movie_Year.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_Movie_Year.$error.required">Movie Year is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Language</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="Relased Year" name="movieaddform_Movie_Language" 
+								size="50" ng-model="movieaddform_Movie_Language" required/>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_Movie_Language.$dirty && movieaddform.movieaddform_Movie_Language.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_Movie_Language.$error.required">Movie Language is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div >
 					<div class="col-md-4">
 					</div>
@@ -139,7 +179,7 @@
 				<div>
 					<div class="col-md-4">
 					</div>
-					<div class="col-md-5" style="padding-bottom: 5px; padding-top: 10px;">
+					<div class="col-md-5" style="padding-bottom: 130px; padding-top: 10px;">
 						<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
 							<div class="errorbox" >
 							<ul>
@@ -157,4 +197,4 @@
 		</form>
 	</div>
 </div>
-<div style="padding-top: 50px;" ng-include src="'footer.html'"></div>
+<div ng-include src="'footer.html'"></div>

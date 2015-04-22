@@ -294,6 +294,8 @@ movieapp.controller('addMovieController',
 				+ $scope.movieaddform_movieCategory + " "
 				+ $scope.movieaddform_actors + " "
 				+ $scope.movieaddform_movie_image_link + " "
+				+ $scope.movieaddform_Movie_Year + " "
+				+ $scope.movieaddform_Movie_Language + " "
 				+ $scope.movieaddform_Movie_URL + " ");
 		console.log("--> Submitting form ");
 		var data = {
@@ -303,6 +305,8 @@ movieapp.controller('addMovieController',
 			actors : $scope.movieaddform_actors,
 			moviefilepath : $scope.movieaddform_movie_image_link,
 			url : $scope.movieaddform_Movie_URL,
+			year : $scope.movieaddform_Movie_Year,
+			language : $scope.movieaddform_Movie_Language,
 		};
 		
 		var response = $http.post("../../api/v1/addmovie", data,
