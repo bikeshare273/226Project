@@ -110,6 +110,12 @@ movieapp.config(function($routeProvider) {
 		controller : 'playMovieController'
 	})
 	
+	// logout
+	.when('/logout', {
+		templateUrl : 'home.html',
+		controller : 'logoutController'
+	})
+	
 	.otherwise({
 		redirectTo : '/'
 	});
@@ -594,4 +600,35 @@ movieapp.controller('playMovieController',
     $scope.itemsByPage=6;
     
 	console.log('playMovieController end');
+});
+
+//create the controller and inject Angular's $scope
+movieapp.controller('logoutController', function($scope, $http, $rootScope) {
+	// create a message to display in our view
+	console.log('logout');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = false;
+    $rootScope.hideAdminNavTabs = true;
+   
+	var data = {};
+	var response = $http.post("../../api/v1/logout", data,
+			{});
+    
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				console.log(dataFromServer);
+				if (dataFromServer == true) {
+					console.log("logout sucessfully");
+					 
+				}
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.loginform_error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
 });
