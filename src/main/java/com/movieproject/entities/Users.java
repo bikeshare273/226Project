@@ -16,7 +16,7 @@ public class Users {
 			CREATE TABLE users(
 					
 			userid				INT(10),
-			firstandlastname	VARCHAR(100)			
+			name				VARCHAR(100)			
 			mobile_number		VARCHAR(14)			NOT NULL,
 			buildingno			VARCHAR(10)			NOT NULL,
 			street				VARCHAR(100)		NOT NULL,
@@ -34,8 +34,8 @@ public class Users {
 	@Column(name = "userid", unique = true, nullable = false)	
 	private Integer userid;	
 	
-	@Column(name = "firstandlastname", unique = false, nullable = false )
-	private String firstandlastname;
+	@Column(name = "name", unique = false, nullable = false )
+	private String name;
 	
 	@Column(name = "email", unique = true, nullable = false)	
 	private String email;	
@@ -51,6 +51,9 @@ public class Users {
 	
 	@Column(name = "apartmentno",unique = false, nullable = true)
 	private String apartmentno;
+	
+	@Column(name = "address",unique = false, nullable = true)
+	private String address;
 	
 	@Column(name = "city",unique = false, nullable = true)
 	private String city;
@@ -75,11 +78,11 @@ public class Users {
 	}
 	
 	public String getFirstandlastname() {
-		return firstandlastname;
+		return name;
 	}
 
-	public void setFirstandlastname(String firstandlastname) {
-		this.firstandlastname = firstandlastname;
+	public void setFirstandlastname(String name) {
+		this.name = name;
 	}
 	
 	public String getEmail() {
@@ -122,6 +125,14 @@ public class Users {
 		this.apartmentno = apartmentno;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	public String getCity() {
 		return city;
 	}

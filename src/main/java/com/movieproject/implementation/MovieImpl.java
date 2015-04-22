@@ -3,6 +3,7 @@ package com.movieproject.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.movieproject.dao.interfaces.IDaoInterfaceForMovie;
+import com.movieproject.dto.MovieDTO;
 import com.movieproject.entities.Categories;
 import com.movieproject.entities.Movie;
 
@@ -24,7 +25,7 @@ public class MovieImpl {
 	 */
 	
 		
-	public void addMovie(){
+	public void addMovie(MovieDTO movie){
 	
 		
 	

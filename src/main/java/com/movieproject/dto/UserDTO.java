@@ -7,12 +7,13 @@ public class UserDTO {
 /**********************************************************************/
 	
 	private Integer userid;
-	private String firstandlastname;
+	private String name;
 	private String email;
 	private String mobile_number;
 	private String buildingno;
 	private String street;
 	private String apartmentno;
+	private String address;
 	private String city;
 	private String zipcode;
 	private String state;
@@ -30,10 +31,10 @@ public class UserDTO {
 		this.userid = userid;
 	}
 	public String getFirstandlastname() {
-		return firstandlastname;
+		return name;
 	}
-	public void setFirstandlastname(String firstandlastname) {
-		this.firstandlastname = firstandlastname;
+	public void setFirstandlastname(String name) {
+		this.name = name;
 	}	
 	public String getMobile_number() {
 		return mobile_number;
@@ -106,6 +107,12 @@ public class UserDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 /**********************************************************************/

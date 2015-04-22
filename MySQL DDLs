@@ -1,0 +1,139 @@
+
+create schema movieapp;
+
+/************************************/
+
+CREATE TABLE movies(
+movieid			INT(10),			
+moviename		VARCHAR(100)	NOT NULL,
+categoryid		INT(10)			NOT NULL,
+description		VARCHAR(500)	,#NOT NULL,
+moviefilepath	VARCHAR(100)	,#NOT NULL,
+url				VARCHAR(500)	,#NOT NULL,
+language		VARCHAR(100)	,#NOT NULL,
+month			INT(2)			,#NOT NULL,
+year			INT(4)			,#NOT NULL,
+
+PRIMARY KEY (movieid));
+
+/************************************/
+
+CREATE TABLE actors(
+actorid			INT(10),
+actorname		VARCHAR(100),
+
+PRIMARY KEY (actorid));
+
+/************************************/
+
+CREATE TABLE categories(
+categoryid		INT(10),
+categoryname	VARCHAR(100)		 UNIQUE	NOT NULL,
+categorydesc	VARCHAR(200)		,#NOT NULL,
+
+PRIMARY KEY (categoryid));
+
+/************************************/
+
+CREATE TABLE users(
+userid				INT(10),
+name				VARCHAR(100),
+email				VARCHAR(100)		UNIQUE NOT NULL,
+mobile_number		VARCHAR(20)			,#NOT NULL,
+buildingno			VARCHAR(20)			,#NOT NULL,
+street				VARCHAR(100)		,#NOT NULL,
+apartmentno			VARCHAR(20)			,#NOT NULL,
+address				VARCHAR(200)		,
+city				VARCHAR(20)			,#NOT NULL,
+zipcode				VARCHAR(20)			,#NOT NULL,
+state				VARCHAR(20)			,#NOT NULL,
+country				VARCHAR(20)			,#NOT NULL,
+
+PRIMARY KEY (userid));
+
+
+
+/************************************/
+
+CREATE TABLE userhistory(
+userhistory_id	INT(10),
+userid   		INT(10),
+movieid  		INT(10),
+categoryid		INT(10),
+
+PRIMARY KEY (userhistory_id),
+
+FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE,
+FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE,
+FOREIGN KEY (categoryid) REFERENCES categories(categoryid) ON DELETE CASCADE 
+
+);
+
+/************************************/
+
+CREATE TABLE moviesactors(
+movies_actor_id	INT(10)			NOT NULL,
+movieid			INT(10),
+actorid			INT(10),
+
+PRIMARY KEY (movies_actor_id),
+
+FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE,
+FOREIGN KEY (actorid) REFERENCES actors(actorid) ON DELETE CASCADE);
+
+/************************************/
+
+CREATE TABLE comments(
+commentid			INT(10),
+movieid				INT(10),
+userid				INT(10),
+comment				VARCHAR(200),
+
+PRIMARY KEY (commentid),
+
+FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE,
+FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE);
+
+/************************************/
+
+CREATE TABLE moviecomments(
+movie_comment_id	INT(10),
+movieid				INT(10),
+userid				INT(10),
+commentid			INT(10),
+
+PRIMARY KEY (movie_comment_id),
+
+FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE,
+FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE,
+FOREIGN KEY (commentid) REFERENCES comments(commentid) ON DELETE CASCADE);
+
+/************************************/
+
+CREATE TABLE userratings(
+user_rating_id		INT(10),
+userid				INT(10),
+movieid				INT(10),
+rating				INT(2)		NOT NULL	DEFAULT 00,
+
+PRIMARY KEY (user_rating_id),
+
+FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE,
+FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE);
+
+/************************************/
+
+CREATE TABLE login(
+userid					INT(10),
+username				VARCHAR(100),
+password				VARCHAR(100),
+sessionid				INT(10),
+
+PRIMARY KEY (userid));
+
+
+/************************************/
+
+CREATE TABLE test(
+TestIdString		VARCHAR(100),
+TestString			VARCHAR(100));
