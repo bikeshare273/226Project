@@ -7,6 +7,7 @@ public class UserDTO {
 /**********************************************************************/
 	
 	private Integer userid;
+	private String firstandlastname;
 	private String email;
 	private String mobile_number;
 	private String buildingno;
@@ -28,6 +29,12 @@ public class UserDTO {
 	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
+	public String getFirstandlastname() {
+		return firstandlastname;
+	}
+	public void setFirstandlastname(String firstandlastname) {
+		this.firstandlastname = firstandlastname;
+	}	
 	public String getMobile_number() {
 		return mobile_number;
 	}

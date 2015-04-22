@@ -96,7 +96,24 @@ public UserDTO getUser(Integer userid)
 	
 /************************************************************************************/
 	
-	
+public boolean deleteUser(Integer userid)
+
+{
+		Users userObject = usersDao.getUserById(userid);
+		Login loginObject = loginDao.getLoginByUserId(userid);
+		
+		if(userObject == null) {return false;}
+		if(loginObject == null) {return false;}
+		
+		usersDao.delete(userObject);
+		loginDao.delete(loginObject);
+		
+		return true;
+}	
+
+
+/************************************************************************************/
+
 public boolean checkUniqueUsername(String username)
 
 {

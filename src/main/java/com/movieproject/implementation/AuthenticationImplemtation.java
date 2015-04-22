@@ -40,14 +40,14 @@ public class AuthenticationImplemtation implements IAuthInterfaceForLogin{
 			{
 				/* Generate New SessionId */
 				
-				int sessionId = movieAppUtils.generateIdValue(0);
+				Integer sessionid = movieAppUtils.generateIdValue(0);
 				
-				login.setSessionId(sessionId);
+				login.setSessionid(sessionid);
 				
 				loginDao.update(login);
 				
 				//set session id in header
-				loginDTO.setSessionId(sessionId);
+				loginDTO.setSessionId(sessionid);
 				loginDTO.setUserid(login.getUserid());
 				loginDTO.setMessage("Login Sucessful");
 				loginDTO.setLoginValidationStatus(true);
