@@ -38,6 +38,7 @@ import com.movieproject.dao.interfaces.ITestDao;
 import com.movieproject.dto.DemoDto;
 import com.movieproject.dto.LoginDTO;
 import com.movieproject.dto.MovieDTO;
+import com.movieproject.dto.SearchDTO;
 import com.movieproject.dto.UserDTO;
 import com.movieproject.entities.Movie;
 import com.movieproject.entities.Test;
@@ -221,11 +222,11 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "/getmoviesforlanguage", method = RequestMethod.GET)
+	@RequestMapping(value = "/getmoviesforlanguage", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Movie> getMoviesForLanguage(@Valid @RequestBody String language) {
+	public List<Movie> getMoviesForLanguage(@Valid @RequestBody SearchDTO searchDTO) {
 		
-		return movieImpl.getAllMoviesForLanguage(language);
+		return movieImpl.getAllMoviesForLanguage(searchDTO.getSearchString());
 	
 	}
 	

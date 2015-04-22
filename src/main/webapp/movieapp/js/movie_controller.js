@@ -266,10 +266,42 @@ movieapp.controller('homeAdminController',
 				+ $scope.serachCriteria);
 		console.log("--> Submitting form ");
 		var data = {
-			search : $scope.serach,
-			serachCriteria : $scope.serachCriteria
+				searchString : $scope.serach
 		};
-		$location.url('/adminMovieSearch');
+		 //get movies data based on search
+		var response;
+		if($scope.serachCriteria == '1'){
+			response = $http.post("../../api/v1/getmoviesforlanguage", data, {});
+		}
+		 
+		response.success(function(dataFromServer, status,
+						headers, config) {
+					var moviesArray = new Array();
+					if (dataFromServer.length > 0) {
+						console.log("call once");
+						moviesArray["dataLength"] = dataFromServer.length;
+						moviesArray["moviesData"] = dataFromServer;
+						console.log("set dataLength "+moviesArray["dataLength"]);
+						console.log("set moviesData "+moviesArray["moviesData"]);
+						dataSharing.set(moviesArray);
+						$location.url('/adminMovieSearch');
+					}else{
+						$rootScope.hideUserNavTabs = true;
+					    $rootScope.hideStaticTabs = false;
+					    $rootScope.hideAdminNavTabs = true;
+						//$location.url('/');
+					}
+				});
+		response.error(function(data, status, headers, config) {
+			if (response.status === 401
+					|| response.status === 400) {
+				$scope.error = "Invalid request";
+				$location.url('/');
+				return $q.reject(response);
+			}
+		});
+		
+		//$location.url('/adminMovieSearch');
 	};
 	
 	$scope.addMovieLink = function(item, event) {
@@ -343,17 +375,12 @@ movieapp.controller('adminMovieSearchController',
         transactions: []
     };
     
-    var dataFromServer = new Array();
-    for (var i = 0; i < 10; i++) {
-    	dataFromServer[i] = {
-    		id:i,
-    		movieid: "10",
-    		category: "3",
-    		name:"piku",
-    		actors:"abc, def",
-    		description:"A cab driver (Irrfan Khan) is caught between a dysfunctional father (Amitabh Bachchan) and daughter (Deepika Padukone) as he drives them to Calcutta."
-    	};
-        $scope.queue.transactions.push(dataFromServer[i]);
+    var movies = dataSharing.get().moviesData;
+    console.log("movieslength "+dataSharing.get().dataLength);
+    console.log("moviesData "+dataSharing.get().moviesData);
+    for(var i=0; i<dataSharing.get().dataLength; i++){
+    	console.log("movies"+movies[i]);
+    	 $scope.queue.transactions.push(movies[i]);
     }
     $scope.itemsByPage=4;
     
