@@ -153,6 +153,8 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@ResponseBody
 	public UserDTO updateUser(@Valid @RequestBody UserDTO user, @CookieValue("userid") int userid) {
 		
+		user.setUserid(userid);
+		
 		return userImpl.updateUser(user);
 	}
 	
