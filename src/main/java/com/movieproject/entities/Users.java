@@ -29,6 +29,14 @@ public class Users {
 			PRIMARY KEY (userid));
 */
 	
+public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 /**********************************************************************************************/
 	@Id
 	@Column(name = "userid", unique = true, nullable = false)	
@@ -75,14 +83,6 @@ public class Users {
 
 	public void setUserid(Integer userid) {
 		this.userid = userid;
-	}
-	
-	public String getFirstandlastname() {
-		return name;
-	}
-
-	public void setFirstandlastname(String name) {
-		this.name = name;
 	}
 	
 	public String getEmail() {

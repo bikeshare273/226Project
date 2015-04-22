@@ -30,12 +30,6 @@ public class UserDTO {
 	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
-	public String getFirstandlastname() {
-		return name;
-	}
-	public void setFirstandlastname(String name) {
-		this.name = name;
-	}	
 	public String getMobile_number() {
 		return mobile_number;
 	}
@@ -113,6 +107,12 @@ public class UserDTO {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 /**********************************************************************/
