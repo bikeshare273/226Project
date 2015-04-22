@@ -57,7 +57,7 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getMovieByName(String moviename) {
 		
-		String query = "from Movies m where m.moviename = ?";
+		String query = "from Movies m where lower(m.moviename) LIKE lower(?)";
 		@SuppressWarnings("unchecked")
 		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, moviename);
 

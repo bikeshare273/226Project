@@ -38,6 +38,7 @@ import com.movieproject.dao.interfaces.IDaoInterfaceForUsers;
 import com.movieproject.dao.interfaces.ITestDao;
 import com.movieproject.implementation.AuthenticationImplemtation;
 import com.movieproject.implementation.DemoImpl;
+import com.movieproject.implementation.MovieImpl;
 import com.movieproject.implementation.UserImpl;
 import com.movieproject.interceptor.SessionValidatorInterceptor;
 import com.movieproject.util.MovieAppUtil;
@@ -74,6 +75,12 @@ public class MovieAppBeansConfiguration {
 	public UserImpl getUserImpl(){
 		return new UserImpl();
 	}
+	
+	@Bean
+	public MovieImpl getMovieImpl(){
+		return new MovieImpl();
+	}
+	
 	
 	@Bean
 	public IAuthInterfaceForLogin getAuthInterfaceForLogin(){

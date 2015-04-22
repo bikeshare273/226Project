@@ -35,6 +35,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
 
+
+
 import com.movieproject.configuration.MovieAppBeansConfiguration;
 import com.movieproject.dao.TestDao;
 import com.movieproject.dao.interfaces.DemoInterface;
@@ -42,8 +44,10 @@ import com.movieproject.dao.interfaces.IAuthInterfaceForLogin;
 import com.movieproject.dao.interfaces.ITestDao;
 import com.movieproject.dto.DemoDto;
 import com.movieproject.dto.LoginDTO;
+import com.movieproject.dto.MovieDTO;
 import com.movieproject.dto.UserDTO;
 import com.movieproject.entities.Test;
+import com.movieproject.implementation.MovieImpl;
 import com.movieproject.implementation.UserImpl;
 import com.movieproject.interceptor.SessionValidatorInterceptor;
 import com.movieproject.util.MovieAppUtil;
@@ -64,6 +68,10 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 	@Autowired
 	UserImpl userImpl;
+	
+	@Autowired
+	MovieImpl movieImpl;
+	
 	
 	@Autowired
 	IAuthInterfaceForLogin authInterfaceForLogin;
@@ -166,10 +174,6 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 	}
 	
-	
-	
-	
-	
     
 /***********************************************************************************************/
 										
@@ -177,6 +181,17 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 /***********************************************************************************************/
 
+	
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(value = "/addmovie", method = RequestMethod.POST)
+	@ResponseBody
+	public void addMovie(@Valid @RequestBody MovieDTO movie) {
+		
+		movieImpl.addMovie(movie);
+	
+	}
+	
+	
     
     
     
