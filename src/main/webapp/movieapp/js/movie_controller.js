@@ -173,8 +173,8 @@ movieapp.controller('registerController',
 	
 	$scope.signupform_signup = function(item, event) {
 		console.log("--> Submitting form "
-				+ $scope.signupform_email + " "
-				+ $scope.signupform_password);
+				+ $scope.signupform_name + " "
+				+ $scope.signupform_email );
 		console.log("--> Submitting form "
 				+ $scope.signupform_phone + " "
 				+ $scope.signupform_address);
@@ -184,11 +184,11 @@ movieapp.controller('registerController',
 				+ $scope.signupform_country);
 		console.log("--> Submitting form ");
 		var data = {
-			//name : $scope.signupform_name,
+			name : $scope.signupform_name,
 			email : $scope.signupform_email,
 			mobile_number : $scope.signupform_phone,
 			password: $scope.signupform_password,
-			//address : $scope.signupform_address,
+			address : $scope.signupform_address,
 			city : $scope.signupform_city,
 			state : $scope.signupform_state,
 			country : $scope.signupform_country
@@ -407,16 +407,36 @@ movieapp.controller('updateUserController',
     $rootScope.hideAdminNavTabs = true;
     
     //get here to obtain user data
-    $scope.updateuserform_email_old = "xyz@abc.net";
-    $scope.updateuserform_phone_old = "000-000-0000";
-    $scope.updateuserform_address_old = "#17, xyz, 123";
-    $scope.updateuserform_city_old = "San Jose";
-    $scope.updateuserform_state_old = "California";
-    $scope.updateuserform_country_old = "USA";
+	var response = $http.get("../../api/v1/fetchuser");
+	response.success(function(dataFromServer, status,
+					headers, config) {
+				if (dataFromServer) {
+					$scope.updateuserform_name = dataFromServer.name;
+					$scope.updateuserform_email = dataFromServer.email;
+				    $scope.updateuserform_phone = dataFromServer.mobile_number;
+				    $scope.updateuserform_address = dataFromServer.address;
+				    $scope.updateuserform_city = dataFromServer.city;
+				    $scope.updateuserform_state = dataFromServer.state;
+				    $scope.updateuserform_country = dataFromServer.country;
+				}else{
+					$rootScope.hideUserNavTabs = true;
+				    $rootScope.hideStaticTabs = false;
+				    $rootScope.hideAdminNavTabs = true;
+					$location.url('/');
+				}
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
     
     $scope.updateuserform_updateUser = function() {
     	console.log("--> Submitting form "
-				+ $scope.updateuserform_email + " "
+				+ $scope.updateuserform_name + " "
 				+ $scope.updateuserform_password);
 		console.log("--> Submitting form "
 				+ $scope.updateuserform_phone + " "
@@ -427,9 +447,30 @@ movieapp.controller('updateUserController',
 				+ $scope.updateuserform_country);
 		console.log("--> Submitting form ");
 		var data = {
-			movieid : $scope.movieupdateform_movieid
-		};
-		$scope.movieupdateform_success = "User Details Updated Successfully";
+				name : $scope.updateuserform_name,
+				email : $scope.updateuserform_email,
+				mobile_number : $scope.updateuserform_phone,
+				password: $scope.updateuserform_password,
+				address : $scope.updateuserform_address,
+				city : $scope.updateuserform_city,
+				state : $scope.updateuserform_state,
+				country : $scope.updateuserform_country
+			};
+			var response = $http.post("../../api/v1/updateuser", data,
+					{});
+			response
+					.success(function(dataFromServer, status,
+							headers, config) {
+						$scope.updateuserform_success = "User updated successfully";
+					});
+			response.error(function(data, status, headers, config) {
+				if (response.status === 401
+						|| response.status === 400) {
+					$scope.error = "Invalid request";
+					$location.url('/');
+					return $q.reject(response);
+				}
+			});
 	};
 	
 	console.log('updateUserController end');

@@ -79,17 +79,6 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 							/* Login, Logout and Session Management */
 
 /***********************************************************************************************/
-	@Bean
-	public FilterRegistrationBean shallowEtagHeaderFilter() {
-
-		ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
-		FilterRegistrationBean etagBean = new FilterRegistrationBean();
-		etagBean.setFilter(shallowEtagHeaderFilter);
-		ArrayList<String> urlPatterns = new ArrayList<String>();
-		urlPatterns.add("/api/v1/*");
-		etagBean.setUrlPatterns(urlPatterns);
-		return etagBean;
-	}
 	
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

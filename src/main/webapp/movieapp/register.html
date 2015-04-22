@@ -11,6 +11,21 @@
 			<form name="signupform">
 			
 				<div style="padding-bottom: 5px; padding-top: 5px;">
+					<input type="text" class="form-control" placeholder="Name"
+								name="signupform_name" size="50" ng-model="signupform_name" 
+								required>
+					
+					<div class="error-container"
+						ng-show="signupform.signupform_name.$dirty && signupform.signupform_name.$invalid">
+						<small class="errorbox"
+							ng-show="signupform.signupform_name.$error.required">Name is required</small> 
+							<small class="errorbox"
+							ng-show="signupform.signupform_name.$error.email">Name id is invalid</small>
+					</div>
+					
+				</div>
+			
+				<div style="padding-bottom: 5px; padding-top: 5px;">
 					<input type="email" class="form-control" placeholder="Email"
 								name="signupform_email" size="50" ng-model="signupform_email" 
 								required>
