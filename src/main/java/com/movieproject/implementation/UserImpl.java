@@ -1,6 +1,7 @@
 package com.movieproject.implementation;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,6 +9,7 @@ import com.movieproject.dao.interfaces.IDaoInterfaceForLogin;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUsers;
 import com.movieproject.dto.UserDTO;
 import com.movieproject.entities.Login;
+import com.movieproject.entities.Movie;
 import com.movieproject.entities.Users;
 import com.movieproject.util.MovieAppUtil;
 
@@ -93,6 +95,20 @@ public UserDTO getUser(Integer userid)
 		
 		return userDTO;
 }
+
+/************************************************************************************/
+
+	public List<Users> getAllUsers()
+	{
+		List<Users> allUsers = usersDao.getAllUsers();
+
+		if (allUsers == null) {
+			return null;
+		}
+
+		return allUsers;
+	}
+
 	
 /************************************************************************************/
 	

@@ -3,7 +3,9 @@ package com.movieproject.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -94,5 +96,17 @@ public class MovieAppUtil {
 		}
 		
 /*******************************************************************************/
-
+		
+		public List<String> arraySplitter(String actors)
+		{
+			List<String> splitList = new ArrayList<String>();
+			
+			if(actors == null) {return null;}
+			
+			List<String> arrayList = new ArrayList<String>();
+						
+			arrayList = Arrays.asList(actors.split("\\s*,\\s*"));			
+			
+			return arrayList; 
+		}
 }

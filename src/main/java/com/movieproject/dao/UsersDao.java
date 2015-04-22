@@ -133,4 +133,18 @@ public class UsersDao implements IDaoInterfaceForUsers {
 		
 	}
 
+	@Override
+	public List<Users> getAllUsers() {
+		
+		String query = "from Users";
+		@SuppressWarnings("unchecked")
+		List<Users> users = (List<Users>) hibernateTemplate.find(query);
+
+		if (users.isEmpty()) {
+			return null;
+		} else {
+			return users;
+		}
+	}
+
 }

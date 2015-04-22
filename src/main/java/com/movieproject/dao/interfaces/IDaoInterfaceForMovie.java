@@ -16,5 +16,6 @@ public interface IDaoInterfaceForMovie {
 	public List<Movie> getMoviesByCategory(Integer categoryid);
 	public List<Movie> getMoviesByLanguage(String language);
 	public List<Movie> getMoviesByYear(Integer year);
+	public List<Movie> getAllMovies();
 	
 }

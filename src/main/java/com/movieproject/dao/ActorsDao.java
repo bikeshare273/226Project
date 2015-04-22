@@ -56,7 +56,7 @@ public class ActorsDao implements IDaoInterfaceForActors {
 	@Override
 	public Actors getActorByName(String actorname) {
 		
-		String query = "from Actors a where a.actorname = ?";
+		String query = "from Actors a where a.actorname LIKE ?";
 		@SuppressWarnings("unchecked")
 		List<Actors> actor = (List<Actors>) hibernateTemplate.find(query, actorname);
 

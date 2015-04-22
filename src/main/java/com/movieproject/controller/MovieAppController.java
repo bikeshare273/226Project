@@ -2,6 +2,7 @@ package com.movieproject.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -29,14 +30,6 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-
-
-
-
-
-
-
-
 import com.movieproject.configuration.MovieAppBeansConfiguration;
 import com.movieproject.dao.TestDao;
 import com.movieproject.dao.interfaces.DemoInterface;
@@ -46,7 +39,9 @@ import com.movieproject.dto.DemoDto;
 import com.movieproject.dto.LoginDTO;
 import com.movieproject.dto.MovieDTO;
 import com.movieproject.dto.UserDTO;
+import com.movieproject.entities.Movie;
 import com.movieproject.entities.Test;
+import com.movieproject.entities.Users;
 import com.movieproject.implementation.MovieImpl;
 import com.movieproject.implementation.UserImpl;
 import com.movieproject.interceptor.SessionValidatorInterceptor;
@@ -174,6 +169,15 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 	}
 	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/fetchallusers", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Users> fetchAllUsers() {
+		
+		return userImpl.getAllUsers();		
+	
+	}
+	
     
 /***********************************************************************************************/
 										
@@ -188,8 +192,66 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	public void addMovie(@Valid @RequestBody MovieDTO movie) {
 		
 		movieImpl.addMovie(movie);
+	}
+		
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getmovie", method = RequestMethod.GET)
+	@ResponseBody
+	public Movie getMovie(@Valid @RequestBody Integer movieid) {
+		
+		return movieImpl.getMovie(movieid);
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/fetchallmovies", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Movie> fetchAllMovies() {
+		
+		return movieImpl.getAllMovies();		
 	
 	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getmoviesofcategory", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Movie> getMoviesOfCategoty(@Valid @RequestBody Integer categoryid) {
+		
+		return movieImpl.getAllMoviesForCategory(categoryid);
+	
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getmoviesforlanguage", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Movie> getMoviesForLanguage(@Valid @RequestBody String language) {
+		
+		return movieImpl.getAllMoviesForLanguage(language);
+	
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getmoviesforyear", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Movie> getMoviesForYear(@Valid @RequestBody Integer year) {
+		
+		return movieImpl.getAllMoviesForYear(year);
+	
+	}
+			
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/deletemovie", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteMovie(@Valid @RequestBody Integer movieid) {
+		
+		movieImpl.deleteMovie(movieid);
+	
+	}
+	
+/***********************************************************************************************/
+	
+								/* MovieApp */
+
+/***********************************************************************************************/
 	
 	
     

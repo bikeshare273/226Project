@@ -15,5 +15,6 @@ public interface IDaoInterfaceForUsers {
 	public Users getUserByUserMobileNumber(String mobile_number);
 	public List<Users> getUsersByCity(String city);
 	public List<Users> getUsersByCountry(String country);
+	public List<Users> getAllUsers();
 
 }

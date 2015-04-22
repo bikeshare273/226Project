@@ -6,8 +6,8 @@ import com.movieproject.entities.Comment;
 
 public interface IDaoInterfaceForComment {
 	
-	public Comment save(Comment comment);
-	public Comment update(Comment comment);
+	public void save(Comment comment);
+	public void update(Comment comment);
 	public void   delete(Comment comment);
 	public Comment getCommentsById(Integer commentid);
 	public List<Comment> getCommentsByMovie(Integer movieid);

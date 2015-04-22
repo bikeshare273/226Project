@@ -17,19 +17,18 @@ public class CommentDao implements IDaoInterfaceForComment {
 	HibernateTemplate hibernateTemplate;
 
 	@Override
-	public Comment save(Comment comment) {
+	public void save(Comment comment) {
 
 		hibernateTemplate.save(comment);
 		
-		return null;
+
 	}
 
 	@Override
-	public Comment update(Comment comment) {
+	public void update(Comment comment) {
 
 		hibernateTemplate.update(comment);
 		
-		return null;
 	}
 
 	@Override

@@ -13,6 +13,7 @@ public class MovieDTO {
 	private String language;	
 	private Integer month;	
 	private Integer year;
+	private String actors;
 	
 	public Integer getMovieid() {
 		return movieid;
@@ -67,6 +68,12 @@ public class MovieDTO {
 	}
 	public void setYear(Integer year) {
 		this.year = year;
+	}
+	public String getActors() {
+		return actors;
+	}
+	public void setActors(String actors) {
+		this.actors = actors;
 	}
 
 }
