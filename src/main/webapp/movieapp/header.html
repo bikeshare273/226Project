@@ -21,7 +21,7 @@
 						<li><a href="#profile" ng-hide="hideUserNavTabs">Profile</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#logout" ng-hide="(hideUserNavTabs or hideAdminNavTabs)">Logout</a></li>
+						<li><a href="#logout" ng-hide="!(hideUserNavTabs || hideAdminNavTabs)">Logout</a></li>
 					</ul>
 				</div>
 				

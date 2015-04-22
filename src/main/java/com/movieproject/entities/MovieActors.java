@@ -35,7 +35,7 @@ public class MovieActors {
 /*************************************************************************************************/
 	
 	@Id
-	@Column(name = "movie_actor_id", unique = true, nullable = false)
+	@Column(name = "movies_actor_id", unique = true, nullable = false)
 	public Integer getMovie_actor_id() {
 		return movie_actor_id;
 	}

@@ -48,13 +48,11 @@ public class MovieImpl {
 
 		Movie movieObject = new Movie();
 
-		try {
-			BeanUtils.copyProperties(movieObject, movie);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		//BeanUtils.copyProperties(movieObject, movie);
+		movieObject.setMoviename(movie.getMoviename());
+		movieObject.setDescription(movie.getDescription());
+		movieObject.setMoviefilepath(movie.getMoviefilepath());
+		movieObject.setUrl(movie.getUrl());
 
 		Integer movieid = movieAppUtils.generateIdValue(2000);
 		movieObject.setMovieid(movieid);
@@ -67,9 +65,9 @@ public class MovieImpl {
 
 		String actors = movie.getActors();
 
-		updateMovieActors(movieid, actors);
-
 		movieDao.save(movieObject);
+		
+		updateMovieActors(movieid, actors);
 
 		return movie;
 	}
@@ -209,7 +207,7 @@ public class MovieImpl {
 				if (actor == null) {
 					actorid = addActor(actorName);
 				} else {
-					actorid = actor.getActor_id();
+					actorid = actor.getActorid();
 				}
 
 				addMovieActorsEntry(movieid, actorid);
@@ -226,7 +224,7 @@ public class MovieImpl {
 
 		Integer actor_id = movieAppUtils.generateIdValue(9000);
 
-		actorObject.setActor_id(actor_id);
+		actorObject.setActorid(actor_id);
 		actorObject.setActorname(actorName);
 
 		actorsDao.save(actorObject);

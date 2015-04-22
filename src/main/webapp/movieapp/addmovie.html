@@ -53,13 +53,11 @@
 					<div class="col-md-7">
 						<div style="padding-bottom: 5px; padding-top: 5px;">
 							<select
-								id="movieCategory" class="form-control" data-role="listview"
-								ng-model="movieCategory" ng-change="" required>
+								id="movieCategory" name="movieaddform_movieCategory" class="form-control" data-role="listview"
+								ng-model="movieaddform_movieCategory" ng-change="" required>
 								<option value="">Select Movie Category</option>
-								<option value="1">Category 1</option>
-								<option value="2">Category 2</option>
-								<option value="3">Category 3</option>
-								<option value="4">Category 4</option>
+								<option value="1">Horror</option>
+								<option value="2">Comedy</option>
 							</select>
 								
 							<div class="error-container"
@@ -89,6 +87,46 @@
 						</div>
 					</div>
 				</div>
+				
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Movie Image Link</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="Movie Image Link" name="movieaddform_movie_image_link" 
+								size="50" ng-model="movieaddform_movie_image_link" required/>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_movie_image_link.$dirty && movieaddform.movieaddform_movie_image_link.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_movie_image_link.$error.required">Movie Image Link is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-3">
+						<label for=moviename>Movie URL</label> 
+					</div>
+					<div class="col-md-7">
+						<div style="padding-bottom: 5px; padding-top: 5px;">
+							<input type="text" class="form-control" placeholder="Movie URL" name="movieaddform_Movie_URL" 
+								size="50" ng-model="movieaddform_Movie_URL" required/>
+								
+							<div class="error-container"
+								ng-show="movieaddform.movieaddform_Movie_URL.$dirty && movieaddform.movieaddform_Movie_URL.$invalid">
+									<small class="errorbox"
+									ng-show="movieaddform.movieaddform_Movie_URL.$error.required">Movie URL is required</small> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div >
 					<div class="col-md-4">
 					</div>

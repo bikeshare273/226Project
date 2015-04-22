@@ -9,32 +9,30 @@ import javax.persistence.Table;
 @Table(name = "actors")
 public class Actors {
 
-/*********************************************************************/	
+	/*********************************************************************/
 
-/*
- 		CREATE TABLE actors(
-		
-		actorid			INT(10),
-		actorname		VARCHAR(100),
+	/*
+	 * CREATE TABLE actors(
+	 * 
+	 * actorid INT(10), actorname VARCHAR(100),
+	 * 
+	 * PRIMARY KEY (actorid));
+	 */
 
-		PRIMARY KEY (actorid));
-		
-*/
-	
-/*********************************************************************/
+	/*********************************************************************/
 	private Integer actorid;
 	private String actorname;
 
-/*********************************************************************/	
-	
+	/*********************************************************************/
+
 	@Id
 	@Column(name = "actorid", unique = true, nullable = false)
-	public Integer getActor_id() {
+	public Integer getActorid() {
 		return actorid;
 	}
 
-	public void setActor_id(Integer actor_id) {
-		this.actorid = actor_id;
+	public void setActorid(Integer actorid) {
+		this.actorid = actorid;
 	}
 
 	@Column(name = "actorname", unique = true, nullable = false)
@@ -45,8 +43,7 @@ public class Actors {
 	public void setActorname(String actorname) {
 		this.actorname = actorname;
 	}
-	
-/*********************************************************************/		
 
-	
+	/*********************************************************************/
+
 }

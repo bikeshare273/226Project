@@ -42,7 +42,7 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public Movie getMovieById(Integer movieid) {
 
-		String query = "from Movies m where m.movieid = ?";
+		String query = "from Movie m where m.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, movieid);
 
@@ -86,7 +86,7 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getMoviesByLanguage(String language) {
 		
-		String query = "from Movies m where m.language LIKE ?";
+		String query = "from Movie m where m.language LIKE ?";
 		@SuppressWarnings("unchecked")
 		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, language);
 
@@ -101,7 +101,7 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getMoviesByYear(Integer year) {
 
-		String query = "from Movies m where m.year = ?";
+		String query = "from Movie m where m.year = ?";
 		@SuppressWarnings("unchecked")
 		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, year);
 

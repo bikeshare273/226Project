@@ -289,13 +289,38 @@ movieapp.controller('addMovieController',
 
     $scope.movieaddform_addMovie = function(item, event) {
 		console.log("--> Submitting searching form "
-				+ $scope.serach + " "
-				+ $scope.serachCriteria);
+				+ $scope.movieaddform_moviename + " "
+				+ $scope.movieaddform_moviedescription + " "
+				+ $scope.movieaddform_movieCategory + " "
+				+ $scope.movieaddform_actors + " "
+				+ $scope.movieaddform_movie_image_link + " "
+				+ $scope.movieaddform_Movie_URL + " ");
 		console.log("--> Submitting form ");
 		var data = {
-			search : $scope.signupform_name,
-			serachCriteria : $scope.signupform_email
+			moviename : $scope.movieaddform_moviename,
+			description : $scope.movieaddform_moviedescription,
+			categoryid : $scope.movieaddform_movieCategory,
+			actors : $scope.movieaddform_actors,
+			moviefilepath : $scope.movieaddform_movie_image_link,
+			url : $scope.movieaddform_Movie_URL,
 		};
+		
+		var response = $http.post("../../api/v1/addmovie", data,
+				{});
+		response
+				.success(function(dataFromServer, status,
+						headers, config) {
+					$scope.movieaddform_success = "Movie Added successfully";
+				});
+		response.error(function(data, status, headers, config) {
+			if (response.status === 401
+					|| response.status === 400) {
+				$scope.error = "Invalid request";
+				$location.url('/');
+				return $q.reject(response);
+			}
+		});
+		
 		$scope.movieaddform_success = "Movie Added Successfully";
 	};
 	
