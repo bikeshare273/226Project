@@ -164,10 +164,22 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@ResponseBody
 	public UserDTO getUser(@PathVariable Integer userid) {
 		
-		return userImpl.getUser(userid);
-//		
+		return userImpl.getUser(userid);		
+	}
+	
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/fetchuser", method = RequestMethod.GET)
+	@ResponseBody
+	public UserDTO fetchUser(@CookieValue("userid") int userid) {
+		
+		return userImpl.getUser(userid);		
 	
 	}
+	
+	
+	
+	
 	
     
 /***********************************************************************************************/
