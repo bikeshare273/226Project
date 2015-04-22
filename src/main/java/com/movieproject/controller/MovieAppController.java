@@ -233,8 +233,10 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/getmoviesforyear", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Movie> getMoviesForYear(@Valid @RequestBody Integer year) {
+	public List<Movie> getMoviesForYear(@Valid @RequestBody SearchDTO searchDTO) {
 		
+		Integer year = Integer.parseInt(searchDTO.getSearchString());
+				
 		return movieImpl.getAllMoviesForYear(year);
 	
 	}
