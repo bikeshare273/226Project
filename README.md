@@ -1,4 +1,3 @@
-Hi Swapnil
 
 Starting point of Application(UI)
 localhost:8082/movieapp/index.html
