@@ -149,11 +149,9 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 	
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping(value = "/users/{userid}", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
 	@ResponseBody
-	public UserDTO updateUser(@Valid @RequestBody UserDTO user, @PathVariable Integer userid) {
-				
-		user.setUserid(userid);
+	public UserDTO updateUser(@Valid @RequestBody UserDTO user, @CookieValue("userid") int userid) {
 		
 		return userImpl.updateUser(user);
 	}
@@ -165,7 +163,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	public UserDTO getUser(@PathVariable Integer userid) {
 		
 		return userImpl.getUser(userid);
-//		@CookieValue("userid") int userid
+//		
 	
 	}
 	
