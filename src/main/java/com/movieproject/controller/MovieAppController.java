@@ -97,7 +97,13 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
         registry.addInterceptor(sessionValidatorInterceptor).addPathPatterns("/api/v1/loggedin");
     }
 	
-	
+    @RequestMapping(value="/loggedin", method = RequestMethod.GET)
+	@ResponseBody
+	private boolean logeedin() {
+        return true;
+	}
+    
+    
     @RequestMapping("/login")
 	@ResponseBody
 	private LoginDTO login(@Valid @RequestBody LoginDTO loginDTO, HttpServletResponse response) {

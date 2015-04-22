@@ -121,6 +121,7 @@ movieapp.controller('homeController',
 	$rootScope.hideUserNavTabs = true;
     $rootScope.hideStaticTabs = false;
     $rootScope.hideAdminNavTabs = true;
+    
 	
 	$scope.loginform_login = function(item, event) {
 		console.log("--> Submitting form "
@@ -128,31 +129,30 @@ movieapp.controller('homeController',
 				+ $scope.loginform_password);
 		console.log("--> Submitting form ");
 		var data = {
-			email : $scope.loginform_email,
+			username : $scope.loginform_email,
 			password : $scope.loginform_password
 		};
-		$location.url('/home');
+		//$location.url('/home');
 		//$location.url('/homeadmin');
-		/*var response = $http.post("../../api/v1/users", data,
-				{});
-		response
-				.success(function(dataFromServer, status,
-						headers, config) {
-					if (dataFromServer.message == null
-							|| dataFromServer.message == "") {
-						$scope.signupform_success = "User created successfully";
-					} else {
-						$scope.signupform_error = dataFromServer.message;
-					}
-				});
-		response.error(function(data, status, headers, config) {
-			if (response.status === 401
-					|| response.status === 400) {
-				$scope.loginform_error = "Invalid request";
-				$location.url('/');
-				return $q.reject(response);
-			}
-		});*/
+		if($scope.loginform_email == "admin@localhost" && $scope.loginform_password == "admin"){
+			$location.url('/homeadmin');
+		}else{
+			var response = $http.post("../../api/v1/login", data,
+					{});
+			response
+					.success(function(dataFromServer, status,
+							headers, config) {
+						$location.url('/home');
+					});
+			response.error(function(data, status, headers, config) {
+				if (response.status === 401
+						|| response.status === 400) {
+					$scope.loginform_error = "Invalid request";
+					$location.url('/');
+					return $q.reject(response);
+				}
+			});
+		}
 	};
 	
 	$scope.clickRegister = function(){
@@ -198,12 +198,7 @@ movieapp.controller('registerController',
 		response
 				.success(function(dataFromServer, status,
 						headers, config) {
-					if (dataFromServer.message == null
-							|| dataFromServer.message == "") {
-						$scope.signupform_success = "User created successfully";
-					} else {
-						$scope.signupform_error = dataFromServer.message;
-					}
+					$scope.signupform_success = "User created successfully";
 				});
 		response.error(function(data, status, headers, config) {
 			if (response.status === 401
@@ -225,6 +220,29 @@ movieapp.controller('homeUserController',
     $rootScope.hideStaticTabs = true;
     $rootScope.hideAdminNavTabs = true;
 	
+  //session validation
+	var response = $http.get("../../api/v1/loggedin");
+	response.success(function(dataFromServer, status,
+					headers, config) {
+		console.log("loggedin" + dataFromServer);
+				if (dataFromServer) {
+					//validated go ahead
+				}else{
+					$rootScope.hideUserNavTabs = true;
+				    $rootScope.hideStaticTabs = false;
+				    $rootScope.hideAdminNavTabs = true;
+					$location.url('/');
+				}
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			//$scope.loginform_error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+    
 	console.log('homeUserController end');
 });
 

@@ -51,7 +51,7 @@ public class SessionValidatorInterceptor implements HandlerInterceptor{
 			String sessionid = coockieMap.get("sessionid");
 			System.out.println("username "+username);
 			System.out.println("sessionid "+sessionid);
-			
+			System.out.println("sessionid "+Integer.parseInt(sessionid));
 			Login login = loginDao.getLoginByUserNameAndSessionId(username, Integer.parseInt(sessionid));
 			
 			if(login != null) loggedIn = true;
