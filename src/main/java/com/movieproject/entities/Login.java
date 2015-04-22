@@ -59,7 +59,7 @@ public class Login {
 		this.password = password;
 	}
 	
-	@Column(name = "sessionId", unique = false, nullable = true)
+	@Column(name = "sessionid", unique = false, nullable = true)
 	public Integer getSessionId() {
 		return sessionId;
 	}

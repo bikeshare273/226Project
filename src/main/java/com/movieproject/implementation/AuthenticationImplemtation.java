@@ -22,7 +22,9 @@ public class AuthenticationImplemtation implements IAuthInterfaceForLogin{
 
 		String username = loginDTO.getUsername();
 		String password = loginDTO.getPassword();
-
+		System.out.println("password-> "+password);
+		password = movieAppUtils.passwordEncrypter(password);
+		System.out.println("password en -> "+password);
 		try{
 
 			Login login = loginDao.getLoginByUserNameAndPassword(username, password);
@@ -31,25 +33,25 @@ public class AuthenticationImplemtation implements IAuthInterfaceForLogin{
 
 			loginDTO.setMessage("Invalid Username/Password");
 			loginDTO.setLoginValidationStatus(false);
-		}
-
-		else
-
-		{
-			/* Generate New SessionId */
-			
-			int sessionId = movieAppUtils.generateIdValue(0);
-			
-			login.setSessionId(sessionId);
-			
-			loginDao.update(login);
-			
-			//set session id in header
-			loginDTO.setSessionId(sessionId);
-			loginDTO.setUserid(login.getUserid());
-			loginDTO.setMessage("Login Sucessful");
-			loginDTO.setLoginValidationStatus(true);
-		}
+			}
+	
+			else
+	
+			{
+				/* Generate New SessionId */
+				
+				int sessionId = movieAppUtils.generateIdValue(0);
+				
+				login.setSessionId(sessionId);
+				
+				loginDao.update(login);
+				
+				//set session id in header
+				loginDTO.setSessionId(sessionId);
+				loginDTO.setUserid(login.getUserid());
+				loginDTO.setMessage("Login Sucessful");
+				loginDTO.setLoginValidationStatus(true);
+			}
 	}catch(Exception e){
 		e.printStackTrace();
 	}

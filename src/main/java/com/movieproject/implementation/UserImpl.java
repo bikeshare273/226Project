@@ -43,7 +43,7 @@ public class UserImpl {
 		//userObject.setEmail(user.getUsername());
 
 		loginObject.setUserid(userid);
-		loginObject.setUsername(user.getUsername());
+		loginObject.setUsername(user.getEmail());
 		loginObject.setPassword(movieAppUtils.passwordEncrypter(user.getPassword()));
 	
 		usersDao.save(userObject);
