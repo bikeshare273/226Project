@@ -103,7 +103,7 @@ public class LoginDao implements IDaoInterfaceForLogin {
 	@Override
 	public Login getLoginByUserNameAndSessionId(String username, Integer sessionid) {
 
-		String query = "from Login l where l.username = ? and l.sessionId = ?";
+		String query = "from Login l where l.username = ? and l.sessionid = ?";
 		@SuppressWarnings("unchecked")
 		List<Login> logins = (List<Login>) hibernateTemplate.find(query, username, sessionid);
 

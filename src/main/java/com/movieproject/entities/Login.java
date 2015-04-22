@@ -30,7 +30,7 @@ public class Login {
 	private Integer userid;
 	private String username;
 	private String password;
-	private Integer sessionId;
+	private Integer sessionid;
 	
 /***************************************************/
 	
@@ -60,11 +60,11 @@ public class Login {
 	}
 	
 	@Column(name = "sessionid", unique = false, nullable = true)
-	public Integer getSessionId() {
-		return sessionId;
+	public Integer getSessionid() {
+		return sessionid;
 	}
-	public void setSessionId(Integer sessionId) {
-		this.sessionId = sessionId;
+	public void setSessionid(Integer sessionId) {
+		this.sessionid = sessionId;
 	}
 	
 /***************************************************/
