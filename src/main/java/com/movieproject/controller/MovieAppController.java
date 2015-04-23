@@ -196,15 +196,14 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
 		
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "/getmovie", method = RequestMethod.GET)
+	@RequestMapping(value = "/getmoviebyid", method = RequestMethod.GET)
 	@ResponseBody
-	public Movie getMovie(@Valid @RequestBody Integer movieid) {
+	public Movie getMovie(@Valid @RequestBody SearchDTO searchDTO) {
 		
+		Integer movieid = Integer.parseInt(searchDTO.getSearchString()); 
+			
 		return movieImpl.getMovie(movieid);
 	}
-	
-	
-	
 	
 	
 	@ResponseStatus(HttpStatus.OK)
@@ -225,9 +224,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 		
 		return movieImpl.getMoviesByName(moviename);
 	
-	}
-	
-	
+	}	
 	
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/getmoviesofcategory", method = RequestMethod.POST)
