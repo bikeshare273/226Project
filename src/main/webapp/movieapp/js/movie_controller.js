@@ -1,4 +1,4 @@
-var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource', 'smart-table', 'videosharing-embed']);
+var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource', 'smart-table', 'videosharing-embed', 'ngAnimate']);
 
 movieapp.run(function($rootScope) {
 	$rootScope.hideUserNavTabs = true;
@@ -249,6 +249,65 @@ movieapp.controller('homeUserController',
 		}
 	});
 	
+	//get 6 top rated movies details
+	var data = {
+		
+	};
+	var response = $http.post("../../api/v1/topratedmovies", data,
+			{});
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				
+				$scope.movie_toprated = new Array();
+				for(var i=0; i<dataFromServer.length; i++){
+					console.log("top rated movie "+dataFromServer[i]);
+					$scope.movie_toprated[i] = dataFromServer[i];
+				}
+				
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+	
+	//get last watched movies 
+	var response = $http.post("../../api/v1/recentlywatchedmovies", data,
+			{});
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				
+				$scope.movie_recentlywatched = new Array();
+				for(var i=0; i<dataFromServer.length; i++){
+					console.log("recently watched movie "+dataFromServer[i]);
+					$scope.movie_recentlywatched[i] = dataFromServer[i];
+				}
+				
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+	
+	//on click on movie image open movie play page
+	$scope.openMoviePage = function(movieid) {
+	    	
+	    	var data = {};
+	    	data["movieid"] = movieid;
+	    	dataSharing.set(data);
+	    	$location.url('/playMovie');
+	    	
+	    };
+	
 	//search movie
 	$scope.searchMovie = function(item, event) {
 		console.log("--> Submitting searching form "
@@ -273,6 +332,8 @@ movieapp.controller('homeUserController',
 				data["searchString"] = "2";
 			}
 			response = $http.post("../../api/v1/getmoviesofcategory", data, {});
+		}else if($scope.serachCriteria == '5'){
+			response = $http.post("../../api/v1/getmoviesbyactorname", data, {});
 		}
 		
 		 
@@ -340,6 +401,8 @@ movieapp.controller('homeAdminController',
 				data["searchString"] = "2";
 			}
 			response = $http.post("../../api/v1/getmoviesofcategory", data, {});
+		}else if($scope.serachCriteria == '5'){
+			response = $http.post("../../api/v1/getmoviesbyactorname", data, {});
 		}
 		
 		 
@@ -664,7 +727,7 @@ movieapp.controller('serachMovieController',
 
 
 movieapp.controller('playMovieController',
-		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
+		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope, $route) {
 	console.log('playMovieController start');
 	$rootScope.hideUserNavTabs = false;
     $rootScope.hideStaticTabs = true;
@@ -761,11 +824,16 @@ movieapp.controller('playMovieController',
     	var response = $http.post("../../api/v1/addcomment", data,
     			{});
         
+    	
     	response
     			.success(function(dataFromServer, status,
     					headers, config) {
-    				console.log(dataFromServer);
-    				$scope.comment_success = "Comment Added Successfully";
+    				var dataNew = {};
+    				dataNew["movieid"] = movieid;
+    		    	dataSharing.set(dataNew);
+    		    	$route.reload();
+    		    	//$location.url('/playMovie');
+    				//$scope.comment_success = "Comment Added Successfully";
     			});
     	response.error(function(data, status, headers, config) {
     		if (response.status === 401

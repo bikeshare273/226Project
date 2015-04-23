@@ -22,6 +22,7 @@
 							<option value="2">Year</option>
 							<option value="3">Movie Name</option>
 							<option value="4">Category</option>
+							<option value="5">Actor</option>
 						</select>
 					</div>
 				</div>
@@ -43,24 +44,60 @@
 	</div>
 	
 	<div style="padding-top:160px;">
-		<div class="col-md-12">
+		<div class="col-md-12" style="padding-left:30px; font-weight: bold; font-size: 20px">
+			Top Rated Movies : 
+		</div>
+	</div>
+	
+	<div style="padding-top:40px; padding-bottom: 100px">
+		<div class="col-md-12" style="padding-bottom: 100px">
 			<div class="col-md-2" style="">
-				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_toprated[0].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_toprated[0].moviefilepath}}" height="275" width="225"/>
 			</div>
 			<div class="col-md-2" style="">
-				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_toprated[1].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_toprated[1].moviefilepath}}" height="275" width="225"/>
 			</div>
 			<div class="col-md-2" style="">
-				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_toprated[2].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_toprated[2].moviefilepath}}" height="275" width="225"/>
 			</div>
 			<div class="col-md-2" style="">
-				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_toprated[3].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_toprated[3].moviefilepath}}" height="275" width="225"/>
 			</div>
 			<div class="col-md-2" style="">
-				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_toprated[4].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_toprated[4].moviefilepath}}" height="275" width="225"/>
 			</div>
 			<div class="col-md-2" style="">
-				<img class="featurette-image img-responsive center-block" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_toprated[5].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_toprated[5].moviefilepath}}" height="275" width="225"/>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div style="padding-top:40px; padding-bottom: 40px" ng-hide="movie_recentlywatched[0] == null">
+		<div class="col-md-12" style="padding-left:30px; font-weight: bold; font-size: 20px; padding-bottom: 40px">
+			Recently Watched Movies : 
+		</div>
+	</div>
+	
+	<div style="padding-top:40px;">
+		<div class="col-md-12" style="padding-bottom: 200px">
+			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[0] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[0].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[0].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[1] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[1].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[1].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[2] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[2].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[2].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[3] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[3].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[3].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[4] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[4].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[4].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[5] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[5].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[5].moviefilepath}}" height="275" width="225"/>
 			</div>
 		</div>
 	

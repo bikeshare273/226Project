@@ -185,9 +185,9 @@ public class MovieAppBeansConfiguration {
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
-		//dataSource.setUrl("jdbc:mysql://localhost:3306/movieapp");
-		//dataSource.setUsername("root");
-		//dataSource.setPassword("");
+		/*dataSource.setUrl("jdbc:mysql://localhost:3306/movieapp");
+		dataSource.setUsername("root");
+		dataSource.setPassword("");*/
 		dataSource.setUrl("jdbc:mysql://db4free.net:3306/movieapp");
 		dataSource.setUsername("movieadmin");
 		dataSource.setPassword("movieadmin");

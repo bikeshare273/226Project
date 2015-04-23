@@ -11,8 +11,8 @@
         "fontawesome": "~4.1.0",
         "angular-route": "1.4.0-build.3962+sha.fe9cd9d",
         "angular-resource": "1.4.0-build.3962+sha.fe9cd9d",
+        "angular-animate": "1.4.0-build.3962+sha.fe9cd9d",
         "angular-smart-table": "2.0.2",
-        "angular-youtube-mb" : "1.0.0",
         "ng-videosharing-embed" : "0.3.2"
     }
 }
