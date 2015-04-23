@@ -650,6 +650,15 @@ movieapp.controller('serachMovieController',
     }
     $scope.itemsByPage=4;
     
+    $scope.openMoviePage = function(movieid) {
+    	
+    	var data = {};
+    	data["movieid"] = movieid;
+    	dataSharing.set(data);
+    	$location.url('/playMovie');
+    	
+    };
+    
 	console.log('serachMovieController end');
 });
 
@@ -667,6 +676,37 @@ movieapp.controller('playMovieController',
     $scope.movie_actors = dataSharing.get().actors;
     $scope.movie_rating = dataSharing.get().rating;
     $scope.movie_id = dataSharing.get().movieid;
+    
+    //get movie data
+    var movieid = dataSharing.get().movieid
+    console.log("movie data for movieid "+movieid);
+    
+    var data = {
+    		searchString : movieid
+	};
+	var response = $http.post("../../api/v1/getmoviebyid", data,
+			{});
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				
+				$scope.movie_name = dataFromServer.moviename;
+				$scope.movie_description = dataFromServer.description;
+				$scope.movie_category = dataFromServer.categoryid.categoryname;
+				$scope.movie_actors = dataFromServer.actors;
+				$scope.movie_rating = dataFromServer.averageRating;
+				
+				
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+    
     
     //all stars empty first
     var selectedStars = 0;
@@ -689,6 +729,28 @@ movieapp.controller('playMovieController',
     
     //post comment
     $scope.postComment = function() {
+    	console.log("comment "+$scope.usercomment+" on "+movieid);
+    	var data = {
+    			movieid : movieid,
+    			comment : $scope.usercomment
+    	};
+    	var response = $http.post("../../api/v1/addcomment", data,
+    			{});
+        
+    	response
+    			.success(function(dataFromServer, status,
+    					headers, config) {
+    				console.log(dataFromServer);
+    				$scope.comment_success = "Comment Added Successfully";
+    			});
+    	response.error(function(data, status, headers, config) {
+    		if (response.status === 401
+    				|| response.status === 400) {
+    			$scope.error = "Invalid request";
+    			$location.url('/');
+    			return $q.reject(response);
+    		}
+    	});
     	
     };
     
@@ -696,14 +758,36 @@ movieapp.controller('playMovieController',
     $scope.queue = {
         transactions: []
     };
+    var data = {
+    		searchString : movieid,
+	};
+	var response = $http.post("../../api/v1/getcommentsformovie", data,
+			{});
     
-    var dataFromServer = new Array();
-    for (var i = 0; i < 100; i++) {
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				for (var i = 0; i < dataFromServer.length; i++) {
+					console.log("comment "+i);
+					$scope.queue.transactions.push(dataFromServer[i]);
+				}
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+	
+	
+    /*for (var i = 0; i < 100; i++) {
     	dataFromServer[i] = {
     		comment:"The film proves that good clean and neat comedy without any cheap and vulgar dialogs or gestures is definitely more entertaining and enjoyable."
     	};
         $scope.queue.transactions.push(dataFromServer[i]);
-    }
+    }*/
     $scope.itemsByPage=6;
     
 	console.log('playMovieController end');

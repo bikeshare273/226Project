@@ -294,9 +294,9 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
     
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "/getcommentsformovie", method = RequestMethod.GET)
+	@RequestMapping(value = "/getcommentsformovie", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Comment> getAllCommentForAMovie(@Valid SearchDTO searchDTO) {
+	public List<Comment> getAllCommentForAMovie(@Valid @RequestBody SearchDTO searchDTO) {
 		
 		Integer movieid = Integer.parseInt(searchDTO.getSearchString());
     	

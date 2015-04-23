@@ -16,7 +16,7 @@
 			<tbody ng-hide="isLoading">
 			
 				<tr ng-repeat="row in emptyArray track by $index">
-					<td style="width:30%;">{{row.moviename}}</td>
+					<td style="width:30%;"><a ng-click="openMoviePage(row.movieid)">{{row.moviename}}</a></td>
 					<td style="width:10%;">{{row.categoryid.categoryname}}</td>
 					<td style="width:60%;">{{row.description}}</td>
 					<td style="width:10px;">{{row.actors}}</td>
