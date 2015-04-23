@@ -60,12 +60,14 @@ public class MovieImpl {
 		Integer movieid = movieAppUtils.generateIdValue(2000);
 		movieObject.setMovieid(movieid);
 		movie.setMovieid(movieid);
-
+		
+		movieObject.setAverageRating(0);
+		
 		Categories category = categoriesDao.getCategoryById(movie
 				.getCategoryid());
 
 		movieObject.setCategoryid(category);
-
+		
 		String actors = movie.getActors();
 
 		movieDao.save(movieObject);

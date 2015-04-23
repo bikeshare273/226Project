@@ -61,7 +61,11 @@ public class UserRatingsImpl {
 		Users user = userDao.getUserById(userid);
 		userrating.setUserid(user);
 			
-		userrating.setRating(userRatingDTO.getRating());
+		
+		Integer rating = userRatingDTO.getRating();
+		userrating.setRating(rating);
+		
+		updateAverageRatingOfMovie(movieid, rating);
 		
 		userRatingsDao.save(userrating);
 	
@@ -104,4 +108,45 @@ public class UserRatingsImpl {
 	}
 	
 /*****************************************************************************************/	
+
+	public void updateAverageRatingOfMovie(Integer movieid, Integer rating)
+	{
+		Movie movie = movieDao.getMovieById(movieid);
+		
+		double updatedAverageRating = movie.getAverageRating();
+		
+		List<UserRatings> allRatingsForMovie = getUserRatingsByMovieId(movieid);
+		
+		Integer countOfRatings;
+		
+		 if (allRatingsForMovie == null)
+		{
+		
+			countOfRatings = 0;
+		}
+		 else
+		 {
+			 countOfRatings = allRatingsForMovie.size();
+		 }
+		 
+		
+		double totalRating = updatedAverageRating * countOfRatings;
+		
+		totalRating += rating;
+		
+		if (totalRating != 0)
+		{
+			updatedAverageRating = totalRating / (countOfRatings + 1 );
+		}
+		else
+		{	
+			updatedAverageRating = 0;
+		}
+		
+		movie.setAverageRating(updatedAverageRating);
+		movieDao.update(movie);
+		
+	}
+
+
 }

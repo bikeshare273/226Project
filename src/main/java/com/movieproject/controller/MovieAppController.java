@@ -42,6 +42,7 @@ import com.movieproject.dto.MovieDTO;
 import com.movieproject.dto.SearchDTO;
 import com.movieproject.dto.UserDTO;
 import com.movieproject.dto.UserRatingsDTO;
+import com.movieproject.entities.Comment;
 import com.movieproject.entities.Movie;
 import com.movieproject.entities.Test;
 import com.movieproject.entities.Users;
@@ -295,10 +296,11 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/getcommentsformovie", method = RequestMethod.GET)
 	@ResponseBody
-	public void getAllCommentForAMovie(@Valid SearchDTO searchDTO) {
+	public List<Comment> getAllCommentForAMovie(@Valid SearchDTO searchDTO) {
 		
 		Integer movieid = Integer.parseInt(searchDTO.getSearchString());
-    	commentImpl.getAllCommentsForMovie(movieid);
+    	
+		return commentImpl.getAllCommentsForMovie(movieid);
 		
 	}
 	

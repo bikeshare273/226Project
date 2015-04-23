@@ -38,16 +38,9 @@ public class Movie {
 	private Integer month;
 	private Integer year;
 	private String actors;
+	private double averageRating;
 
-	public String getActors() {
-		return actors;
-	}
-
-	public void setActors(String actors) {
-		this.actors = actors;
-	}
-
-	/*************************************************************************************************/
+/*************************************************************************************************/
 
 	@Id
 	@Column(name = "movieid", unique = true, nullable = false)
@@ -130,6 +123,24 @@ public class Movie {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	@Column(name = "actors", unique = false, nullable = true)
+	public String getActors() {
+		return actors;
+	}
+
+	public void setActors(String actors) {
+		this.actors = actors;
+	}
+
+	@Column(name = "averageRating", unique = false, nullable = true)
+	public double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(double averageRating) {
+		this.averageRating = averageRating;
 	}
 
 	/*************************************************************************************************/
