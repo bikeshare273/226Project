@@ -717,14 +717,36 @@ movieapp.controller('playMovieController',
 	//after clicking on stars
     $scope.clickedStar = function(starid) {
     	selectedStars = 0;
-    	for(var i=0; i<6; i++){
-    		if(i <= starid){
-    			selectedStars++;
-    			$scope.starclassname[i] = "glyphicon glyphicon-star";
-    		}else{
-    			$scope.starclassname[i] = "glyphicon glyphicon-star-empty";
-    		}
-    	}
+    	//post rating
+    	 var data = {
+    			 movieid : movieid,
+    			 rating : starid
+    		};
+    		var response = $http.post("../../api/v1/addrating", data,
+    				{});
+    		response
+    				.success(function(dataFromServer, status,
+    						headers, config) {
+    					
+    					for(var i=0; i<6; i++){
+    			    		if(i <= starid){
+    			    			selectedStars++;
+    			    			$scope.starclassname[i] = "glyphicon glyphicon-star";
+    			    		}else{
+    			    			$scope.starclassname[i] = "glyphicon glyphicon-star-empty";
+    			    		}
+    			    	}
+    					
+    				});
+    		response.error(function(data, status, headers, config) {
+    			if (response.status === 401
+    					|| response.status === 400) {
+    				$scope.error = "Invalid request";
+    				$location.url('/');
+    				return $q.reject(response);
+    			}
+    		});
+    	
     };
     
     //post comment
