@@ -42,6 +42,9 @@ public class CommentImpl {
 		Users user = userDao.getUserById(userid);
 		comment.setUserid(user);
 		
+		String commentString = commentDTO.getComment(); 
+		comment.setComment(commentString);
+		
 		commentDao.save(comment);
 	
 		return commentid ;
