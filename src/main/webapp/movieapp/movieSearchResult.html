@@ -1,25 +1,25 @@
 <div ng-controller="serachMovieController">
 
-<div class="col-md-12"  style="padding-top:80px">
+<div class="col-md-12"  style="padding-top:80px; padding-bottom:100px;">
 	<div class="col-md-1">
 	</div>
 	<div class="col-md-10">
 		<table st-safe-src="queue.transactions" st-table="emptyArray" class="table table-striped" >
 			<thead>
 			<tr >
-				<th style="width:10%">Movie Name</th>
+				<th style="width:20%">Movie Name</th>
 				<th style="width:10%">Category</th>
-				<th style="width:45%">Movie Description</th>
-				<th style="width:20%">Actors</th>
+				<th style="width:50%">Movie Description</th>
+				<th style="width:30%">Actors</th>
 			</tr>
 			</thead>
 			<tbody ng-hide="isLoading">
 			
 				<tr ng-repeat="row in emptyArray track by $index">
-					<td style="width:30%;"><a ng-click="openMoviePage(row.movieid)">{{row.moviename}}</a></td>
-					<td style="width:10%;">{{row.categoryid.categoryname}}</td>
-					<td style="width:60%;">{{row.description}}</td>
-					<td style="width:10px;">{{row.actors}}</td>
+					<td ><a ng-click="openMoviePage(row.movieid)">{{row.moviename}}</a></td>
+					<td >{{row.categoryid.categoryname}}</td>
+					<td >{{row.description}}</td>
+					<td >{{row.actors}}</td>
 					</td>
 				</tr>
 			</tbody>
