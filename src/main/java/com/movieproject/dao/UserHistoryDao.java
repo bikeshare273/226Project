@@ -56,7 +56,7 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	@Override
 	public List<UserHistory> getUserHistoryByUserId(Integer userid) {
 
-		String query = "from UserHistory u where u.userid.userid = ?";
+		String query = "from UserHistory u where u.userid.userid = ? order by u.userhistory_id desc ";
 		@SuppressWarnings("unchecked")
 		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, userid);
 
@@ -65,8 +65,6 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 		} else {
 			return userhistory;
 		}
-		
-		
 	}
 
 	@Override

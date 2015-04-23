@@ -127,6 +127,21 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	
 	}
 
+	@Override
+	public List<Movie> getMoviesOrderedByTopRatings() {
+		
+		String query = "from Movie order by averageRating desc";
+		@SuppressWarnings("unchecked")
+		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query);
+
+		if (movies.isEmpty()) {
+			return null;
+		} else {
+			return movies;
+		}
+		
+	}
+
 	
 	
 	

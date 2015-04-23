@@ -46,6 +46,7 @@ import com.movieproject.entities.Comment;
 import com.movieproject.entities.Movie;
 import com.movieproject.entities.Test;
 import com.movieproject.entities.Users;
+import com.movieproject.implementation.AnalyticsImpl;
 import com.movieproject.implementation.CommentImpl;
 import com.movieproject.implementation.MovieImpl;
 import com.movieproject.implementation.UserImpl;
@@ -87,6 +88,10 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 	@Autowired
 	MovieAppUtil movieAppUtils;
+	
+	@Autowired
+	AnalyticsImpl analyticsImpl;
+	
 	
 /***********************************************************************************************/
     
@@ -306,7 +311,6 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 /***********************************************************************************************/
 	
-	
 									/* Rating APIs */
 
 /***********************************************************************************************/
@@ -323,13 +327,33 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 /***********************************************************************************************/   
 
+									/* Analytics APIs */
+
+/***********************************************************************************************/
     
     
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(value = "/topratedmovies", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Movie> getMoviesByTopRating() {
+    
+		List<Movie> movies = analyticsImpl.getTopRatedSixMovies();
+		
+		return movies; 
+		
+	}
     
     
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(value = "/tester", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Movie> getRecentlyWatchedMovies() {
     
-    
-    
+		List<Movie> movies = analyticsImpl.getRecentlyWatchedMovies(85291284);
+		
+		return movies; 
+		
+	}
     
     
     

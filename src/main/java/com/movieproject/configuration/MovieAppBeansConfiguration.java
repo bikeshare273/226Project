@@ -36,10 +36,12 @@ import com.movieproject.dao.interfaces.IDaoInterfaceForUserHistory;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUserRatings;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUsers;
 import com.movieproject.dao.interfaces.ITestDao;
+import com.movieproject.implementation.AnalyticsImpl;
 import com.movieproject.implementation.AuthenticationImplemtation;
 import com.movieproject.implementation.CommentImpl;
 import com.movieproject.implementation.DemoImpl;
 import com.movieproject.implementation.MovieImpl;
+import com.movieproject.implementation.UserHistoryImpl;
 import com.movieproject.implementation.UserImpl;
 import com.movieproject.implementation.UserRatingsImpl;
 import com.movieproject.interceptor.SessionValidatorInterceptor;
@@ -99,6 +101,15 @@ public class MovieAppBeansConfiguration {
 		return new AuthenticationImplemtation();
 	}
 	
+	@Bean
+	public AnalyticsImpl getAalyticsImpl(){
+		return new AnalyticsImpl();
+	}
+	
+	@Bean
+	public UserHistoryImpl getUserHistoryImpl(){
+		return new UserHistoryImpl();
+	}
 	
 /********************************************************************************************************************/	
 

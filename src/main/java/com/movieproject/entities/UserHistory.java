@@ -37,7 +37,7 @@ public class UserHistory {
 /**********************************************************************************************/
 	
 	@Id
-	@Column(name = "userhistoryid", unique = true, nullable = false)
+	@Column(name = "userhistory_id", unique = true, nullable = false)
 	public Integer getUserhistory_id() {
 		return userhistory_id;
 	}
