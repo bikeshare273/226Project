@@ -2,7 +2,10 @@
 	<div class="col-md-12">
 		<div class="col-md-7">
 			<div class="col-md-12">
-				<img class="featurette-image img-responsive center-block" style="height: 400px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				<!-- <img class="featurette-image img-responsive center-block" style="height: 400px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> -->
+				<div style="height: 400px; padding: 10px 10px 10px 10px; border: 1px solid black;">
+					<embed-video href="{{movie_URL}}" width=685 height=375 ></embed-video>
+				</div>
 			</div>
 			
 			<div class="col-md-12" style="padding-top:20px;">
@@ -80,6 +83,15 @@
 		</div>
 		<div class="col-md-5">
 			<div class="col-md-12">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-6" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;">
+					 <img ng-src="{{movie_filepath}}" height="275" width="225"/>
+				</div>
+				<div class="col-md-3">
+				</div>
+			</div>
+			<div class="col-md-12" style="padding-top:20px">
 				<div class="col-md-4" style="font-weight: bold">
 					Name :
 				</div>

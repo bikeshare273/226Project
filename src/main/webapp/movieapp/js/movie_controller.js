@@ -1,4 +1,4 @@
-var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource', 'smart-table' ]);
+var movieapp = angular.module('movieapp', [ 'ngRoute', 'ngResource', 'smart-table', 'videosharing-embed']);
 
 movieapp.run(function($rootScope) {
 	$rootScope.hideUserNavTabs = true;
@@ -676,6 +676,7 @@ movieapp.controller('playMovieController',
     $scope.movie_actors = dataSharing.get().actors;
     $scope.movie_rating = dataSharing.get().rating;
     $scope.movie_id = dataSharing.get().movieid;
+    $scope.movie_filepath = dataSharing.get().moviefilepath;
     
     //get movie data
     var movieid = dataSharing.get().movieid
@@ -695,7 +696,8 @@ movieapp.controller('playMovieController',
 				$scope.movie_category = dataFromServer.categoryid.categoryname;
 				$scope.movie_actors = dataFromServer.actors;
 				$scope.movie_rating = dataFromServer.averageRating;
-				
+				$scope.movie_URL = dataFromServer.url;
+				$scope.movie_filepath = dataFromServer.moviefilepath;
 				
 			});
 	response.error(function(data, status, headers, config) {
