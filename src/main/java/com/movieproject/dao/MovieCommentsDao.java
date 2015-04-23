@@ -42,7 +42,7 @@ public class MovieCommentsDao implements IDaoInterfaceForMovieComments {
 	@Override
 	public MovieComments getMovieCommentsById(Integer movie_comment_id) {
 
-		String query = "from Moviecomments m where m.movie_comment_id = ?";
+		String query = "from MovieComments m where m.movie_comment_id = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieComments> movieComments = (List<MovieComments>) hibernateTemplate.find(query, movie_comment_id);
 
@@ -56,7 +56,7 @@ public class MovieCommentsDao implements IDaoInterfaceForMovieComments {
 	@Override
 	public List<MovieComments> getMovieCommentsByMovieId(Integer movieid) {
 
-		String query = "from Moviecomments m where m.movie.movieid = ?";
+		String query = "from Moviecomments m where m.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieComments> movieComments = (List<MovieComments>) hibernateTemplate.find(query, movieid);
 
@@ -72,7 +72,7 @@ public class MovieCommentsDao implements IDaoInterfaceForMovieComments {
 	@Override
 	public List<MovieComments> getMovieCommentsByUserId(Integer userid) {
 
-		String query = "from Moviecomments m where m.users.userid = ?";
+		String query = "from Moviecomments m where m.userid.userid = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieComments> movieComments = (List<MovieComments>) hibernateTemplate.find(query, userid);
 
@@ -86,7 +86,7 @@ public class MovieCommentsDao implements IDaoInterfaceForMovieComments {
 	@Override
 	public List<MovieComments> getMovieCommentsByMovieAndUser(Integer movieid,	Integer userid) {
 
-		String query = "from Moviecomments m where  m.movie.movieid = ? and m.users.userid = ?";
+		String query = "from Moviecomments m where  m.movieid.movieid = ? and m.userid.userid = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieComments> movieComments = (List<MovieComments>) hibernateTemplate.find(query, movieid, userid);
 

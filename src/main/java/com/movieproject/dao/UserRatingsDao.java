@@ -42,7 +42,7 @@ public class UserRatingsDao implements IDaoInterfaceForUserRatings {
 	@Override
 	public UserRatings getUserRatingsById(Integer user_rating_id) {
 
-		String query = "from Userratings u where u.user_rating_id = ?";
+		String query = "from UserRatings u where u.user_rating_id = ?";
 		@SuppressWarnings("unchecked")
 		List<UserRatings> userratings = (List<UserRatings>) hibernateTemplate.find(query, user_rating_id);
 
@@ -57,7 +57,7 @@ public class UserRatingsDao implements IDaoInterfaceForUserRatings {
 	@Override
 	public List<UserRatings> getUserRatingsByMovieId(Integer movieid) {
 
-		String query = "from Userratings u where u.movie.movieid = ?";
+		String query = "from UserRatings u where u.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<UserRatings> userratings = (List<UserRatings>) hibernateTemplate.find(query, movieid);
 
@@ -74,7 +74,7 @@ public class UserRatingsDao implements IDaoInterfaceForUserRatings {
 	public List<UserRatings> getUserRatingsByUserIdAndMovieId(Integer userid,
 			Integer movieid) {
 
-		String query = "from Userratings u where u.users.userid = ? and u.movie.movieid = ?";
+		String query = "from UserRatings u where u.userid.userid = ? and u.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<UserRatings> userratings = (List<UserRatings>) hibernateTemplate.find(query, userid ,movieid);
 
@@ -89,7 +89,7 @@ public class UserRatingsDao implements IDaoInterfaceForUserRatings {
 	@Override
 	public List<UserRatings> getUserRatingsByRating(Integer rating) {
 
-		String query = "from Userratings u where u.rating = ?";
+		String query = "from UserRatings u where u.rating = ?";
 		@SuppressWarnings("unchecked")
 		List<UserRatings> userratings = (List<UserRatings>) hibernateTemplate.find(query, rating);
 

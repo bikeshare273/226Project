@@ -41,7 +41,7 @@ public class CommentDao implements IDaoInterfaceForComment {
 	@Override
 	public Comment getCommentsById(Integer commentid) {
 	
-		String query = "from Comments c where c.commentid = ?";
+		String query = "from Comment c where c.commentid = ?";
 		@SuppressWarnings("unchecked")
 		List<Comment> comment = (List<Comment>) hibernateTemplate.find(query, commentid);
 
@@ -55,7 +55,7 @@ public class CommentDao implements IDaoInterfaceForComment {
 	@Override
 	public List<Comment> getCommentsByMovie(Integer movieid) {
 	
-		String query = "from Comments c where c.movie.movieid = ?";
+		String query = "from Comment c where c.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<Comment> commentsForTheMovie = (List<Comment>) hibernateTemplate.find(query, movieid);
 
@@ -69,7 +69,7 @@ public class CommentDao implements IDaoInterfaceForComment {
 	@Override
 	public List<Comment> getCommentsByUser(Integer userid) {
 		
-		String query = "from Comments c where c.users.userid = ?";
+		String query = "from Comment c where c.userid.userid = ?";
 		@SuppressWarnings("unchecked")
 		List<Comment> commentsByTheUser = (List<Comment>) hibernateTemplate.find(query, userid);
 
@@ -83,7 +83,7 @@ public class CommentDao implements IDaoInterfaceForComment {
 	@Override
 	public List<Comment> getCommentsByUserAndMovie(Integer userid,	Integer movieid) {
 		
-		String query = "from Comments c where c.users.userid = ? and c.movie.movieid = ?";
+		String query = "from Comment c where c.userid.userid = ? and c.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<Comment> commentByUserForAMovie = (List<Comment>) hibernateTemplate.find(query, userid, movieid);
 

@@ -42,7 +42,7 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	@Override
 	public UserHistory getUserHistoryById(Integer userhistory_id) {
 
-		String query = "from Userhistory u where u.userhistory_id = ?";
+		String query = "from UserHistory u where u.userhistory_id = ?";
 		@SuppressWarnings("unchecked")
 		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, userhistory_id);
 
@@ -56,7 +56,7 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	@Override
 	public List<UserHistory> getUserHistoryByUserId(Integer userid) {
 
-		String query = "from Userhistory u where u.users.userid = ?";
+		String query = "from UserHistory u where u.userid.userid = ?";
 		@SuppressWarnings("unchecked")
 		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, userid);
 
@@ -72,7 +72,7 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	@Override
 	public List<UserHistory> getUserHistoryByMovieId(Integer movieid) {
 		
-		String query = "from Userhistory u where u.movie.movieid = ?";
+		String query = "from UserHistory u where u.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, movieid);
 
@@ -87,7 +87,7 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	@Override
 	public List<UserHistory> getUserHistoryByCategoryId(Integer categoryid) {
 
-		String query = "from Userhistory u where u.categories.categoryid = ?";
+		String query = "from UserHistory u where u.categoryid.categoryid = ?";
 		@SuppressWarnings("unchecked")
 		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, categoryid);
 
@@ -104,7 +104,7 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	public List<UserHistory> getUserHistoryByUserIdAndCategoryId(
 			Integer userid, Integer categoryid) {
 		
-		String query = "from Userhistory u where u.users.userid = ? and u.categories.categoryid = ?";
+		String query = "from UserHistory u where u.userid.userid = ? and u.categoryid.categoryid = ?";
 		@SuppressWarnings("unchecked")
 		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, userid, categoryid);
 
