@@ -13,7 +13,7 @@ url				VARCHAR(1000)	,#NOT NULL,
 language		VARCHAR(100)	,#NOT NULL,
 month			INT(2)			,#NOT NULL,
 year			INT(4)			,#NOT NULL,
-actors		VARCHAR(1000)	
+actors		VARCHAR(1000),	
 averageRating	DOUBLE(3,1)
 
 PRIMARY KEY (movieid));
