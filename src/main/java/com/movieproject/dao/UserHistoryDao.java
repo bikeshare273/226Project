@@ -99,6 +99,24 @@ public class UserHistoryDao implements IDaoInterfaceForUserHistory {
 	}
 
 	@Override
+	public List<UserHistory> getUserHistoryByUserIdAndMovieId( Integer userid, Integer movieid) {
+		
+		String query = "from UserHistory u where u.userid.userid = ? and u.movieid.movieid = ?";
+		@SuppressWarnings("unchecked")
+		List<UserHistory> userhistory = (List<UserHistory>) hibernateTemplate.find(query, userid, movieid);
+
+		if (userhistory.isEmpty()) {
+			return null;
+		} else {
+			return userhistory;
+		}
+	}
+	
+	
+	
+	
+	
+	@Override
 	public List<UserHistory> getUserHistoryByUserIdAndCategoryId(
 			Integer userid, Integer categoryid) {
 		

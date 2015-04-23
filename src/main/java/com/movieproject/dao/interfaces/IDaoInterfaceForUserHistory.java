@@ -13,6 +13,7 @@ public interface IDaoInterfaceForUserHistory {
 	public List<UserHistory> getUserHistoryByUserId(Integer userid);
 	public List<UserHistory> getUserHistoryByMovieId(Integer movieid);
 	public List<UserHistory> getUserHistoryByCategoryId(Integer categoryid);
+	public List<UserHistory> getUserHistoryByUserIdAndMovieId( Integer userid, Integer movieid);
 	public List<UserHistory> getUserHistoryByUserIdAndCategoryId(Integer userid, Integer categoryid);
 	
 }

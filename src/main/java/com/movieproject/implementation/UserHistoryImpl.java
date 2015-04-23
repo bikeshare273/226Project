@@ -60,9 +60,13 @@ public class UserHistoryImpl {
 		userhistory.setUserid(user);
 		userhistory.setMovieid(movie);
 		userhistory.setCategoryid(category);
-
+		
+		List<UserHistory> previousHistory = getUserHistoryByUserAndMovie(userid, movieid);
+		
+		if(previousHistory == null)
+		{		
 		userHistoryDao.save(userhistory);
-				
+		}		
 	}
 
 /*****************************************************************************************/
@@ -102,6 +106,18 @@ public class UserHistoryImpl {
 	}
 
 /*****************************************************************************************/
+	
+	public List<UserHistory> getUserHistoryByUserAndMovie(Integer userid, Integer movieid)
+	{
+		List <UserHistory> userhistoryEntries = userHistoryDao.getUserHistoryByUserIdAndMovieId(userid, movieid);
+		
+		if(userhistoryEntries == null) {return null;}
+
+		return userhistoryEntries;
+	}
+	
+	
+	/*****************************************************************************************/
 	
 	public List<UserHistory> getUserHistoryByUserAndCategory(Integer userid, Integer categoryid)
 	{
