@@ -1,5 +1,5 @@
 
-<div ng-controller="serachMovieController">
+<div ng-controller="homeUserController">
 
 	<div style="padding-top:70px;">
 		<div class="col-md-12 col-md-push-3">
@@ -19,9 +19,9 @@
 							ng-model="serachCriteria" ng-change="">
 							<option value="">Select Search Criteria</option>
 							<option value="1">Language</option>
-							<option value="2">Criteria 2</option>
-							<option value="3">Criteria 3</option>
-							<option value="4">Criteria 4</option>
+							<option value="2">Year</option>
+							<option value="3">Movie Name</option>
+							<option value="4">Category</option>
 						</select>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 			<div class="col-md-4">
 			</div>
 			<div class="col-md-3">
-				<button class="btn btn-lg btn-default btn-block"  type="button" ng-click="movieSearch()">Search</button>
+				<button class="btn btn-lg btn-default btn-block"  type="button" ng-click="searchMovie()">Search</button>
 			</div>
 			<div class="col-md-5">
 			</div>

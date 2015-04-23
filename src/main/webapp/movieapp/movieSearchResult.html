@@ -1,4 +1,4 @@
-<div ng-controller="movieSearchResultController">
+<div ng-controller="serachMovieController">
 
 <div class="col-md-12"  style="padding-top:80px">
 	<div class="col-md-1">
@@ -7,7 +7,6 @@
 		<table st-safe-src="queue.transactions" st-table="emptyArray" class="table table-striped" >
 			<thead>
 			<tr >
-				<th style="width:5%">ID</th>
 				<th style="width:10%">Movie Name</th>
 				<th style="width:10%">Category</th>
 				<th style="width:45%">Movie Description</th>
@@ -17,11 +16,11 @@
 			<tbody ng-hide="isLoading">
 			
 				<tr ng-repeat="row in emptyArray track by $index">
-					<td >{{row.id}}</td>
-					<td ><a href="" ng-click="playMovie(row.movieid)">{{row.name}}</a></td>
-					<td >{{row.category}}</td>
-					<td >{{row.description}}</td>
-					<td >{{row.actors}}</td>
+					<td style="width:30%;">{{row.moviename}}</td>
+					<td style="width:10%;">{{row.categoryid.categoryname}}</td>
+					<td style="width:60%;">{{row.description}}</td>
+					<td style="width:10px;">{{row.actors}}</td>
+					</td>
 				</tr>
 			</tbody>
 			<tfoot>

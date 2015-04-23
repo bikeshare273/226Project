@@ -248,6 +248,63 @@ movieapp.controller('homeUserController',
 			return $q.reject(response);
 		}
 	});
+	
+	//search movie
+	$scope.searchMovie = function(item, event) {
+		console.log("--> Submitting searching form "
+				+ $scope.serach + " "
+				+ $scope.serachCriteria);
+		console.log("--> Submitting form ");
+		var data = {
+				searchString : $scope.serach
+		};
+		 //get movies data based on search
+		var response;
+		if($scope.serachCriteria == '1'){
+			response = $http.post("../../api/v1/getmoviesforlanguage", data, {});
+		}else if($scope.serachCriteria == '2'){
+			response = $http.post("../../api/v1/getmoviesforyear", data, {});
+		}else if($scope.serachCriteria == '3'){
+			response = $http.post("../../api/v1/getmoviesbyname", data, {});
+		}else if($scope.serachCriteria == '4'){
+			if($scope.serach == "horror"){
+				data["searchString"] = "1";
+			}else if($scope.serach == "comedy"){
+				data["searchString"] = "2";
+			}
+			response = $http.post("../../api/v1/getmoviesofcategory", data, {});
+		}
+		
+		 
+		response.success(function(dataFromServer, status,
+						headers, config) {
+					var moviesArray = new Array();
+					if (dataFromServer.length > 0) {
+						console.log("call once");
+						moviesArray["dataLength"] = dataFromServer.length;
+						moviesArray["moviesData"] = dataFromServer;
+						console.log("set dataLength "+moviesArray["dataLength"]);
+						console.log("set moviesData "+moviesArray["moviesData"]);
+						dataSharing.set(moviesArray);
+						$location.url('/movieSearch');
+					}else{
+						$rootScope.hideUserNavTabs = true;
+					    $rootScope.hideStaticTabs = false;
+					    $rootScope.hideAdminNavTabs = true;
+						//$location.url('/');
+					}
+				});
+		response.error(function(data, status, headers, config) {
+			if (response.status === 401
+					|| response.status === 400) {
+				$scope.error = "Invalid request";
+				$location.url('/');
+				return $q.reject(response);
+			}
+		});
+		
+		//$location.url('/adminMovieSearch');
+	};
     
 	console.log('homeUserController end');
 });
@@ -580,60 +637,20 @@ movieapp.controller('serachMovieController',
     $rootScope.hideStaticTabs = true;
     $rootScope.hideAdminNavTabs = true;
     
-    $scope.movieSearch = function(item, event) {
-		console.log("--> Submitting searching form "
-				+ $scope.serach + " "
-				+ $scope.serachCriteria);
-		console.log("--> Submitting form ");
-		var data = {
-			search : $scope.serach,
-			serachCriteria : $scope.serachCriteria
-		};
-		$location.url('/movieSearch');
-	};
-	
-	console.log('serachMovieController end');
-});
-
-movieapp.controller('movieSearchResultController',
-		function($scope, $http, $location, $q, dataSharing, $timeout, $rootScope) {
-	console.log('movieSearchResultController start');
-	$rootScope.hideUserNavTabs = false;
-    $rootScope.hideStaticTabs = true;
-    $rootScope.hideAdminNavTabs = true;
-    
     $scope.queue = {
-        transactions: []
-    };
-    
-    var dataFromServer = new Array();
-    for (var i = 0; i < 100; i++) {
-    	dataFromServer[i] = {
-    		id:i,
-    		movieid: "10",
-    		category: "3",
-    		name:"piku",
-    		actors:"abc, def",
-    		rating: "5",
-    		description:"A cab driver (Irrfan Khan) is caught between a dysfunctional father (Amitabh Bachchan) and daughter (Deepika Padukone) as he drives them to Calcutta."
-    	};
-        $scope.queue.transactions.push(dataFromServer[i]);
+            transactions: []
+        };
+        
+    var movies = dataSharing.get().moviesData;
+    console.log("movieslength "+dataSharing.get().dataLength);
+    console.log("moviesData "+dataSharing.get().moviesData);
+    for(var i=0; i<dataSharing.get().dataLength; i++){
+    	console.log("movies"+movies[i]);
+    	 $scope.queue.transactions.push(movies[i]);
     }
-    $scope.itemsByPage=6;
+    $scope.itemsByPage=4;
     
-    $scope.playMovie = function(movieid) {
-		console.log("--> Submitting searching form "
-				+ movieid);
-		console.log("--> Submitting form ");
-		for(var i = 0; i < 10; i++){
-			if(dataFromServer[i].movieid == movieid){
-				dataSharing.set(dataFromServer[i]);
-			}
-		}
-		$location.url('/playMovie');
-	};
-	
-	console.log('movieSearchResultController end');
+	console.log('serachMovieController end');
 });
 
 
