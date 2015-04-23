@@ -37,9 +37,11 @@ import com.movieproject.dao.interfaces.IDaoInterfaceForUserRatings;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUsers;
 import com.movieproject.dao.interfaces.ITestDao;
 import com.movieproject.implementation.AuthenticationImplemtation;
+import com.movieproject.implementation.CommentImpl;
 import com.movieproject.implementation.DemoImpl;
 import com.movieproject.implementation.MovieImpl;
 import com.movieproject.implementation.UserImpl;
+import com.movieproject.implementation.UserRatingsImpl;
 import com.movieproject.interceptor.SessionValidatorInterceptor;
 import com.movieproject.util.MovieAppUtil;
 
@@ -82,6 +84,16 @@ public class MovieAppBeansConfiguration {
 	}
 	
 	
+	@Bean
+	public CommentImpl getCommentImpl(){
+		return new CommentImpl();
+	}
+	
+	@Bean
+	public UserRatingsImpl getUserRatingsImpl(){
+		return new UserRatingsImpl();
+	}
+		
 	@Bean
 	public IAuthInterfaceForLogin getAuthInterfaceForLogin(){
 		return new AuthenticationImplemtation();

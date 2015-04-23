@@ -282,7 +282,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 /***********************************************************************************************/
 		
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping(value = "/addmovie", method = RequestMethod.POST)
+	@RequestMapping(value = "/addcomment", method = RequestMethod.POST)
 	@ResponseBody
 	public void addMovie(@Valid @RequestBody CommentDTO commentDTO, @CookieValue("userid") int userid) {
     
