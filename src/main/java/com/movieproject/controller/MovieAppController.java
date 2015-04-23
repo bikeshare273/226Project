@@ -35,16 +35,20 @@ import com.movieproject.dao.TestDao;
 import com.movieproject.dao.interfaces.DemoInterface;
 import com.movieproject.dao.interfaces.IAuthInterfaceForLogin;
 import com.movieproject.dao.interfaces.ITestDao;
+import com.movieproject.dto.CommentDTO;
 import com.movieproject.dto.DemoDto;
 import com.movieproject.dto.LoginDTO;
 import com.movieproject.dto.MovieDTO;
 import com.movieproject.dto.SearchDTO;
 import com.movieproject.dto.UserDTO;
+import com.movieproject.dto.UserRatingsDTO;
 import com.movieproject.entities.Movie;
 import com.movieproject.entities.Test;
 import com.movieproject.entities.Users;
+import com.movieproject.implementation.CommentImpl;
 import com.movieproject.implementation.MovieImpl;
 import com.movieproject.implementation.UserImpl;
+import com.movieproject.implementation.UserRatingsImpl;
 import com.movieproject.interceptor.SessionValidatorInterceptor;
 import com.movieproject.util.MovieAppUtil;
 
@@ -68,6 +72,11 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@Autowired
 	MovieImpl movieImpl;
 	
+	@Autowired
+	CommentImpl commentImpl;
+	
+	@Autowired
+	UserRatingsImpl userRatingImpl;
 	
 	@Autowired
 	IAuthInterfaceForLogin authInterfaceForLogin;
@@ -196,7 +205,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
 		
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "/getmoviebyid", method = RequestMethod.GET)
+	@RequestMapping(value = "/getmoviebyid", method = RequestMethod.POST)
 	@ResponseBody
 	public Movie getMovie(@Valid @RequestBody SearchDTO searchDTO) {
 		
@@ -268,18 +277,50 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	
 /***********************************************************************************************/
 	
-								/* MovieApp */
+								/* Comment APIs */
 
+/***********************************************************************************************/
+		
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(value = "/addmovie", method = RequestMethod.POST)
+	@ResponseBody
+	public void addMovie(@Valid @RequestBody CommentDTO commentDTO, @CookieValue("userid") int userid) {
+    
+		commentImpl.addComment(commentDTO, userid);
+		
+	}
+	
+	
+    
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getcommentsformovie", method = RequestMethod.GET)
+	@ResponseBody
+	public void getAllCommentForAMovie(@Valid SearchDTO searchDTO) {
+		
+		Integer movieid = Integer.parseInt(searchDTO.getSearchString());
+    	commentImpl.getAllCommentsForMovie(movieid);
+		
+	}
+	
 /***********************************************************************************************/
 	
 	
+									/* Rating APIs */
+
+/***********************************************************************************************/
     
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(value = "/addrating", method = RequestMethod.POST)
+	@ResponseBody
+	public void addMovie(@Valid @RequestBody UserRatingsDTO userRatingDTO, @CookieValue("userid") int userid) {
     
-    
-    
-    
-    
-    
+		userRatingImpl.addUserRating(userRatingDTO, userid);
+		
+	}
+	
+	
+/***********************************************************************************************/   
+
     
     
     

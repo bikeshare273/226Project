@@ -60,6 +60,8 @@ public class UserRatingsImpl {
 		
 		Users user = userDao.getUserById(userid);
 		userrating.setUserid(user);
+			
+		userrating.setRating(userRatingDTO.getRating());
 		
 		userRatingsDao.save(userrating);
 	
