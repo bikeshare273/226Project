@@ -57,9 +57,9 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getMovieByName(String moviename) {
 		
-		String query = "from Movies m where lower(m.moviename) LIKE lower('%?%')";
+		String query = "from Movie m where lower(m.moviename) LIKE lower(?)";
 		@SuppressWarnings("unchecked")
-		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, moviename);
+		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, "%"+moviename+"%");
 
 		if (movies.isEmpty()) {
 			return null;
@@ -71,7 +71,7 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getMoviesByCategory(Integer categoryid) {
 
-		String query = "from Movies m where m.categories.categoryid = ?";
+		String query = "from Movie m where m.categoryid.categoryid = ?";
 		@SuppressWarnings("unchecked")
 		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, categoryid);
 
@@ -115,7 +115,7 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getAllMovies() {
 
-		String query = "from Movies";
+		String query = "from Movie";
 		@SuppressWarnings("unchecked")
 		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query);
 

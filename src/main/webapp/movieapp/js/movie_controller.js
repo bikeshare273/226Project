@@ -272,7 +272,19 @@ movieapp.controller('homeAdminController',
 		var response;
 		if($scope.serachCriteria == '1'){
 			response = $http.post("../../api/v1/getmoviesforlanguage", data, {});
+		}else if($scope.serachCriteria == '2'){
+			response = $http.post("../../api/v1/getmoviesforyear", data, {});
+		}else if($scope.serachCriteria == '3'){
+			response = $http.post("../../api/v1/getmoviesbyname", data, {});
+		}else if($scope.serachCriteria == '4'){
+			if($scope.serach == "horror"){
+				data["searchString"] = "1";
+			}else if($scope.serach == "comedy"){
+				data["searchString"] = "2";
+			}
+			response = $http.post("../../api/v1/getmoviesofcategory", data, {});
 		}
+		
 		 
 		response.success(function(dataFromServer, status,
 						headers, config) {
