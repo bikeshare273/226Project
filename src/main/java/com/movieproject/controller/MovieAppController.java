@@ -252,6 +252,17 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getmoviesbyactorname", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Movie> getMoviesByActorName(@Valid @RequestBody SearchDTO searchDTO) {
+		
+		String actorNameSearchString = searchDTO.getSearchString(); 
+		
+		return movieImpl.getMovieByActorName(actorNameSearchString);
+	
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/getmoviesforlanguage", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Movie> getMoviesForLanguage(@Valid @RequestBody SearchDTO searchDTO) {
@@ -332,7 +343,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 /***********************************************************************************************/
     
     
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/topratedmovies", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Movie> getMoviesByTopRating() {
@@ -344,7 +355,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
     
     
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/recentlywatchedmovies", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Movie> getRecentlyWatchedMovies(@CookieValue("userid") int userid) {

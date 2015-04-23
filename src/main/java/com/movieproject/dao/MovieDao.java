@@ -86,9 +86,9 @@ public class MovieDao implements IDaoInterfaceForMovie {
 	@Override
 	public List<Movie> getMoviesByLanguage(String language) {
 		
-		String query = "from Movie m where m.language LIKE ?";
+		String query = "from Movie m where lower(m.language) LIKE lower(?)";
 		@SuppressWarnings("unchecked")
-		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, language);
+		List<Movie> movies = (List<Movie>) hibernateTemplate.find(query, "%"+language+"%");
 
 		if (movies.isEmpty()) {
 			return null;

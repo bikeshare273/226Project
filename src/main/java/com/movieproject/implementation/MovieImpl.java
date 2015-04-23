@@ -1,12 +1,8 @@
 package com.movieproject.implementation;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.movieproject.dao.interfaces.IDaoInterfaceForActors;
 import com.movieproject.dao.interfaces.IDaoInterfaceForCategories;
 import com.movieproject.dao.interfaces.IDaoInterfaceForMovie;
@@ -56,22 +52,22 @@ public class MovieImpl {
 		movieObject.setYear(movie.getYear());
 		movieObject.setLanguage(movie.getLanguage());
 		movieObject.setActors(movie.getActors());
-		
+
 		Integer movieid = movieAppUtils.generateIdValue(2000);
 		movieObject.setMovieid(movieid);
 		movie.setMovieid(movieid);
-		
+
 		movieObject.setAverageRating(0);
-		
+
 		Categories category = categoriesDao.getCategoryById(movie
 				.getCategoryid());
 
 		movieObject.setCategoryid(category);
-		
+
 		String actors = movie.getActors();
 
 		movieDao.save(movieObject);
-		
+
 		updateMovieActors(movieid, actors);
 
 		return movie;
@@ -137,8 +133,8 @@ public class MovieImpl {
 		return categoryid;
 	}
 
-/*****************************************************************************************/
-	
+	/*****************************************************************************************/
+
 	public List<Movie> getAllMovies()
 	{
 		List<Movie> allMovies = movieDao.getAllMovies();
@@ -149,8 +145,8 @@ public class MovieImpl {
 
 		return allMovies;
 	}
-	
-/*****************************************************************************************/
+
+	/*****************************************************************************************/
 
 	public List<Movie> getAllMoviesForCategory(Integer categoryid)
 
@@ -256,7 +252,7 @@ public class MovieImpl {
 
 	}
 
-/*****************************************************************************************/
+	/*****************************************************************************************/
 
 	public void deleteMovieActorsEntries(Integer movieid) {
 		List<MovieActors> movieActorsEntries = new ArrayList<MovieActors>();
@@ -274,14 +270,56 @@ public class MovieImpl {
 		}
 
 	}
-	
-/*****************************************************************************************/
-	
-	
-	
-	
-	
-	
-	
+
+	/*****************************************************************************************/
+
+	public List<Movie> getMovieByActorName(String actorname)
+	{
+
+		List<Actors> actorsList = actorsDao.getActorByNameElasticSearch(actorname);
+		List <Integer> listOfMovieId = new ArrayList<Integer>();
+
+		List<MovieActors> movieActorEntries;
+		Integer actorid;
+		Integer movieid;
+
+
+		if(actorsList == null) {return null;}
+
+		for(Actors actor : actorsList)
+		{
+			actorid = actor.getActorid();
+
+			movieActorEntries = moviesActorsDao.getMovieActorsByActorId(actorid);
+
+			if(movieActorEntries == null) {return null;}
+
+			for(MovieActors eachMovieActorEntry : movieActorEntries)
+			{
+				movieid = eachMovieActorEntry.getMovieid().getMovieid();
+
+				if(! listOfMovieId.contains(movieid))
+				{
+					listOfMovieId.add(movieid);
+				}
+			}				
+		}
+
+		List<Movie> movies = new ArrayList<Movie>();
+
+		Movie movie;
+
+		for(Integer id : listOfMovieId)
+		{
+			movie = movieDao.getMovieById(id);
+			if(movie != null)
+			{
+				movies.add(movie);
+			}
+		}
+
+		return movies;
+
+	}	
 
 }

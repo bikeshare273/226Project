@@ -67,4 +67,22 @@ public class ActorsDao implements IDaoInterfaceForActors {
 		}
 	}
 
+	
+	@Override
+	public List<Actors> getActorByNameElasticSearch(String actorname) {
+		
+		String query = "from Actors a where lower(a.actorname) LIKE lower(?)";
+		@SuppressWarnings("unchecked")
+		List<Actors> actor = (List<Actors>) hibernateTemplate.find(query, "%"+actorname+"%");
+
+		if (actor.isEmpty()) {
+			return null;
+		} else {
+			return actor;
+		}
+	}
+	
+	
+	
+	
 }
