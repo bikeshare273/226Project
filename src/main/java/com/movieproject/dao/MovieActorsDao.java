@@ -42,7 +42,7 @@ public class MovieActorsDao implements IDaoInterfaceForMovieActors {
 	@Override
 	public MovieActors getMovieActorsById(Integer movie_actor_id) {
 
-		String query = "from Moviesactors m where m.movie_actor_id = ?";
+		String query = "from MovieActors m where m.movie_actor_id = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieActors> movieActors = (List<MovieActors>) hibernateTemplate.find(query, movie_actor_id);
 
@@ -57,7 +57,7 @@ public class MovieActorsDao implements IDaoInterfaceForMovieActors {
 	@Override
 	public List<MovieActors> getMovieActorsByMovieId(Integer movieid) {
 
-		String query = "from Moviesactors m where m.movie.movieid = ?";
+		String query = "from MovieActors m where m.movieid.movieid = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieActors> movieActors = (List<MovieActors>) hibernateTemplate.find(query, movieid);
 
@@ -71,7 +71,7 @@ public class MovieActorsDao implements IDaoInterfaceForMovieActors {
 	@Override
 	public List<MovieActors> getMovieActorsByActorId(Integer actorid) {
 
-		String query = "from Moviesactors m where m.actors.actorid = ?";
+		String query = "from MovieActors m where m.actorid.actorid = ?";
 		@SuppressWarnings("unchecked")
 		List<MovieActors> movieActors = (List<MovieActors>) hibernateTemplate.find(query, actorid);
 
@@ -86,7 +86,7 @@ public class MovieActorsDao implements IDaoInterfaceForMovieActors {
 	public List<MovieActors> getMovieActorsByMovieIdAndActorId(Integer movieid,
 			Integer actorid) {
 
-		String query = "from Moviesactors m where m.movie.movieid = ? and m.actors.actorid = actorid ";
+		String query = "from MovieActors m where m.movieid.movieid = ? and m.actorid.actorid = actorid ";
 		@SuppressWarnings("unchecked")
 		List<MovieActors> movieActors = (List<MovieActors>) hibernateTemplate.find(query, movieid ,actorid);
 

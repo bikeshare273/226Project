@@ -399,9 +399,12 @@ movieapp.controller('adminMovieSearchController',
     $scope.deleteMovie = function(movieid) {
 		console.log("--> Submitting form "
 				+ movieid);
-		for(var i = 0; i < 10; i++){
-			if(dataFromServer[i].movieid == movieid){
-				dataSharing.set(dataFromServer[i]);
+		var deleteMovieData = {};
+		for(var i = 0; i < movies.length; i++){
+			if(movies[i].movieid == movieid){
+				deleteMovieData["data"] = movies[i];
+				console.log("delete movie data set "+deleteMovieData);
+				dataSharing.set(deleteMovieData);
 			}
 		}
 		$location.url('/deleteMovie');
@@ -428,19 +431,38 @@ movieapp.controller('deleteMovieController',
     $rootScope.hideStaticTabs = true;
     $rootScope.hideAdminNavTabs = false;
     
-    $scope.moviedeleteform_movieid = dataSharing.get().movieid;
-    $scope.moviedeleteform_movieCategory = dataSharing.get().category;
-    $scope.moviedeleteform_moviename = dataSharing.get().name;
-    $scope.moviedeleteform_moviedescription = dataSharing.get().description;
-    $scope.moviedeleteform_actors = dataSharing.get().actors;
+    var moviesDeleteData = dataSharing.get().data;
+    console.log("movie delete received "+moviesDeleteData);
+    $scope.moviedeleteform_movieid = moviesDeleteData.movieid;
+    $scope.moviedeleteform_movieCategory = moviesDeleteData.categoryid.categoryname;
+    $scope.moviedeleteform_moviename = moviesDeleteData.moviename;
+    $scope.moviedeleteform_moviedescription = moviesDeleteData.description;
+    $scope.moviedeleteform_actors = moviesDeleteData.actors;
 
     $scope.moviedeleteform_deleteMovie = function() {
 		console.log("--> Submitting deleteMovie form "
 				+ $scope.moviedeleteform_movieid);
 		console.log("--> Submitting form ");
 		var data = {
-			movieid : $scope.moviedeleteform_movieid
+			searchString : $scope.moviedeleteform_movieid
 		};
+		
+		var response = $http.post("../../api/v1/deletemovie", data,
+				{});
+		response
+				.success(function(dataFromServer, status,
+						headers, config) {
+					$scope.moviedeleteform_success = "Movie Deleted successfully";
+				});
+		response.error(function(data, status, headers, config) {
+			if (response.status === 401
+					|| response.status === 400) {
+				$scope.error = "Invalid request";
+				$location.url('/');
+				return $q.reject(response);
+			}
+		});
+		
 		$scope.moviedeleteform_success = "Movie Deleted Successfully";
 	};
 	

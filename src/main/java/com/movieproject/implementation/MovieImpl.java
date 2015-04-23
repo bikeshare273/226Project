@@ -55,6 +55,7 @@ public class MovieImpl {
 		movieObject.setUrl(movie.getUrl());
 		movieObject.setYear(movie.getYear());
 		movieObject.setLanguage(movie.getLanguage());
+		movieObject.setActors(movie.getActors());
 		
 		Integer movieid = movieAppUtils.generateIdValue(2000);
 		movieObject.setMovieid(movieid);

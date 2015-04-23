@@ -262,8 +262,9 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/deletemovie", method = RequestMethod.POST)
 	@ResponseBody
-	public void deleteMovie(@Valid @RequestBody Integer movieid) {
+	public void deleteMovie(@Valid @RequestBody SearchDTO searchDTO) {
 		
+		Integer movieid = Integer.parseInt(searchDTO.getSearchString());
 		movieImpl.deleteMovie(movieid);
 	
 	}

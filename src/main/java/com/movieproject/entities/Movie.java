@@ -12,40 +12,43 @@ import javax.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
-/*************************************************************************************************/
-	
-/*
+	/*************************************************************************************************/
 
-			CREATE TABLE movies(
-		
-			movieid			INT(10)			NOT NULL,
-			moviename		VARCHAR(100)	NOT NULL,
-			categoryid		INT(10)			NOT NULL,
-			description		VARCHAR(500)	NOT NULL,
-			moviefilepath	VARCHAR(100)	NOT NULL,
-			url				VARCHAR(500)	NOT NULL,
-			language		VARCHAR(100)	NOT NULL,
-			month			INT(2)			NOT NULL,
-			year			INT(4)			NOT NULL,
+	/*
+	 * 
+	 * CREATE TABLE movies(
+	 * 
+	 * movieid INT(10) NOT NULL, moviename VARCHAR(100) NOT NULL, categoryid
+	 * INT(10) NOT NULL, description VARCHAR(500) NOT NULL, moviefilepath
+	 * VARCHAR(100) NOT NULL, url VARCHAR(500) NOT NULL, language VARCHAR(100)
+	 * NOT NULL, month INT(2) NOT NULL, year INT(4) NOT NULL,
+	 * 
+	 * PRIMARY KEY (movieid));
+	 */
 
-			PRIMARY KEY (movieid));
+	/*************************************************************************************************/
 
-*/	
-		
-/*************************************************************************************************/
-	
-	private Integer movieid;	
-	private String moviename;	
-	private Categories categoryid;	
-	private String description;	
+	private Integer movieid;
+	private String moviename;
+	private Categories categoryid;
+	private String description;
 	private String moviefilepath;
 	private String url;
-	private String language;	
-	private Integer month;	
+	private String language;
+	private Integer month;
 	private Integer year;
-	
-/*************************************************************************************************/
-	
+	private String actors;
+
+	public String getActors() {
+		return actors;
+	}
+
+	public void setActors(String actors) {
+		this.actors = actors;
+	}
+
+	/*************************************************************************************************/
+
 	@Id
 	@Column(name = "movieid", unique = true, nullable = false)
 	public Integer getMovieid() {
@@ -128,7 +131,7 @@ public class Movie {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-/*************************************************************************************************/
-	
+
+	/*************************************************************************************************/
+
 }
