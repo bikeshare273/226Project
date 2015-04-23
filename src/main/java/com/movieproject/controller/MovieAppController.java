@@ -345,16 +345,17 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
     
     
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping(value = "/tester", method = RequestMethod.POST)
+	@RequestMapping(value = "/recentlywatchedmovies", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Movie> getRecentlyWatchedMovies() {
+	public List<Movie> getRecentlyWatchedMovies(@CookieValue("userid") int userid) {
     
-		List<Movie> movies = analyticsImpl.getRecentlyWatchedMovies(85291284);
+		List<Movie> movies = analyticsImpl.getRecentlyWatchedMovies(userid);
 		
 		return movies; 
 		
 	}
     
+/***********************************************************************************************/
     
     
     
