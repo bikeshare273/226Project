@@ -7,8 +7,4 @@ public interface IAuthInterfaceForLogin {
 
 		public LoginDTO login(LoginDTO loginDTO);
 	
-
-	
-	
-
 }
