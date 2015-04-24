@@ -19,6 +19,7 @@ import com.movieproject.dao.LoginDao;
 import com.movieproject.dao.MovieActorsDao;
 import com.movieproject.dao.MovieCommentsDao;
 import com.movieproject.dao.MovieDao;
+import com.movieproject.dao.RecommendationsDao;
 import com.movieproject.dao.TestDao;
 import com.movieproject.dao.UserHistoryDao;
 import com.movieproject.dao.UserRatingsDao;
@@ -32,6 +33,7 @@ import com.movieproject.dao.interfaces.IDaoInterfaceForLogin;
 import com.movieproject.dao.interfaces.IDaoInterfaceForMovie;
 import com.movieproject.dao.interfaces.IDaoInterfaceForMovieActors;
 import com.movieproject.dao.interfaces.IDaoInterfaceForMovieComments;
+import com.movieproject.dao.interfaces.IDaoInterfaceForRecommendations;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUserHistory;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUserRatings;
 import com.movieproject.dao.interfaces.IDaoInterfaceForUsers;
@@ -41,6 +43,7 @@ import com.movieproject.implementation.AuthenticationImplemtation;
 import com.movieproject.implementation.CommentImpl;
 import com.movieproject.implementation.DemoImpl;
 import com.movieproject.implementation.MovieImpl;
+import com.movieproject.implementation.RecommendationsImpl;
 import com.movieproject.implementation.UserHistoryImpl;
 import com.movieproject.implementation.UserImpl;
 import com.movieproject.implementation.UserRatingsImpl;
@@ -111,6 +114,12 @@ public class MovieAppBeansConfiguration {
 		return new UserHistoryImpl();
 	}
 	
+	@Bean
+	public RecommendationsImpl getRecommendationsImpl(){
+		return new RecommendationsImpl();
+	}
+	
+	
 /********************************************************************************************************************/	
 
 													/* DAO Beans */
@@ -172,7 +181,10 @@ public class MovieAppBeansConfiguration {
 		return new LoginDao();
 	}
 	
-	
+	@Bean
+	public IDaoInterfaceForRecommendations getRecommendationsDao(){
+		return new RecommendationsDao();
+	}	
 	
 		
 /********************************************************************************************************************/

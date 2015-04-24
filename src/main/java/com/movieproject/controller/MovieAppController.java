@@ -31,14 +31,17 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.movieproject.configuration.MovieAppBeansConfiguration;
+import com.movieproject.dao.LoginDao;
 import com.movieproject.dao.TestDao;
 import com.movieproject.dao.interfaces.DemoInterface;
 import com.movieproject.dao.interfaces.IAuthInterfaceForLogin;
+import com.movieproject.dao.interfaces.IDaoInterfaceForLogin;
 import com.movieproject.dao.interfaces.ITestDao;
 import com.movieproject.dto.CommentDTO;
 import com.movieproject.dto.DemoDto;
 import com.movieproject.dto.LoginDTO;
 import com.movieproject.dto.MovieDTO;
+import com.movieproject.dto.RecommendationDTO;
 import com.movieproject.dto.SearchDTO;
 import com.movieproject.dto.UserDTO;
 import com.movieproject.dto.UserRatingsDTO;
@@ -49,6 +52,7 @@ import com.movieproject.entities.Users;
 import com.movieproject.implementation.AnalyticsImpl;
 import com.movieproject.implementation.CommentImpl;
 import com.movieproject.implementation.MovieImpl;
+import com.movieproject.implementation.RecommendationsImpl;
 import com.movieproject.implementation.UserHistoryImpl;
 import com.movieproject.implementation.UserImpl;
 import com.movieproject.implementation.UserRatingsImpl;
@@ -95,6 +99,12 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	UserHistoryImpl userHistoryImpl;
+	
+	@Autowired
+	IDaoInterfaceForLogin loginDao;
+	
+	@Autowired
+	RecommendationsImpl recommondationsImpl;
 
 
 
@@ -191,14 +201,24 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "/fetchallusers", method = RequestMethod.GET)
+	@RequestMapping(value = "/fetchallusers", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Users> fetchAllUsers() {
 
 		return userImpl.getAllUsers();		
 
 	}
+	
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteUser(SearchDTO searchDTO) {
 
+		Integer userid = Integer.parseInt(searchDTO.getSearchString());
+		
+		userImpl.deleteUser(userid);
+	}
 
 	/***********************************************************************************************/
 
@@ -227,6 +247,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 		if(movie == null) {return null;}
 		else{
 				userHistoryImpl.addUserHistoryEntry(userid, movieid);
+				recommondationsImpl.updateRecommendations(userid, movieid);
 				return movie;
 		}
 	}
@@ -348,7 +369,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 
 	/***********************************************************************************************/   
 
-	/* Analytics APIs */
+									/* Analytics APIs */
 
 	/***********************************************************************************************/
 
@@ -377,36 +398,64 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	}
 
 	/***********************************************************************************************/
+	
+										/* Recommendation APIs */
 
+	/***********************************************************************************************/
 
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/addrecommendation", method = RequestMethod.POST)
+	@ResponseBody
+	public RecommendationDTO addRecommendation(@RequestBody RecommendationDTO recommendation, @CookieValue("userid") int userid) {
 
+		Integer movieid = recommendation.getMovieid();		
+		String username = recommendation.getUsername();
+		
+		if(username == loginDao.getLoginByUserId(userid).getUsername())
+		{	
+			recommendation.setApplicationMessage("Invalid request. You cannot enter you email id here !");
+			recommendation.setSuccessFlag(false);
+			return recommendation; 
+		
+		}
+		
+		Integer userIdToRecommend = userImpl.getUserIdByUsername(username);
+		
+		if(userIdToRecommend == null )
+		{	
+			recommendation.setApplicationMessage("User does not exist !");
+			recommendation.setSuccessFlag(false);
+			return recommendation; 
+		}
+		
+		recommondationsImpl.addRecommendation(userIdToRecommend, movieid, userid);
+		
+		recommendation.setApplicationMessage("Recommendation sent to : " + username);
+		recommendation.setSuccessFlag(true);
+		return recommendation; 
 
+	}
 
+	/***********************************************************************************************/
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/getrecommendedmovies", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Movie> getRecommendedMovies(@CookieValue("userid") int userid)
+	{
+		boolean recoFlag = recommondationsImpl.verifyUnseenRecommendationsExistForUser(userid);
+		
+		if(recoFlag == false ) { return null; }
+		
+		List<Movie> recommendedMovies = recommondationsImpl.getUnseenRecommondedMovies(userid);
+		
+		return recommendedMovies;
+	}
+	
+	/***********************************************************************************************/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// User Related Operations
+	/* Test APIs */
+	
 	@RequestMapping(value = "/demo/{username}", method = RequestMethod.GET)
 	@ResponseBody
 	public DemoDto demoWelcomeController(@PathVariable String username) {
@@ -432,6 +481,5 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 
 	}
 
-
-
+	/***********************************************************************************************/
 }

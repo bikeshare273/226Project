@@ -142,4 +142,18 @@ public boolean checkUniqueUsername(String username)
 
 /************************************************************************************/
 	
+public Integer getUserIdByUsername(String username)
+
+{
+		Login login = loginDao.getLoginByUserName(username);
+				
+		if(login == null ) {return null;}
+		
+		Integer userid = login.getUserid(); 
+		
+		return userid;
+}
+
+/************************************************************************************/
+
 }

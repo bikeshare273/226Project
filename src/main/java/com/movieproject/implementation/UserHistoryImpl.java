@@ -97,7 +97,7 @@ public class UserHistoryImpl {
 	
 	public List<UserHistory> getUserHistoryByMovieId(Integer movieid)
 	{
-		List <UserHistory> userhistoryEntries = userHistoryDao.getUserHistoryByUserId(movieid);
+		List <UserHistory> userhistoryEntries = userHistoryDao.getUserHistoryByMovieId(movieid);
 		
 		if(userhistoryEntries == null) {return null;}
 
@@ -130,5 +130,26 @@ public class UserHistoryImpl {
 	}
 	
 /*****************************************************************************************/	
+	
+	public void deleteAllUserHistoryEntries(Integer userid)
+	{
+		List <UserHistory> userhistoryEntries = getUserHistoryByUserId(userid);
+	
+		if(userhistoryEntries != null)
+		{
+			for(UserHistory userHistoryEntry : userhistoryEntries)
+			{
+				userHistoryDao.delete(userHistoryEntry);
+			}
+		}
+	
+	
+	}
+	
+	
+	
+	
+	
+	
 	
 }
