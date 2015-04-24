@@ -320,6 +320,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 
 		Integer movieid = Integer.parseInt(searchDTO.getSearchString());
 		movieImpl.deleteMovie(movieid);
+		
 
 	}
 

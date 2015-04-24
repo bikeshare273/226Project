@@ -2,7 +2,9 @@ package com.movieproject.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.movieproject.dao.interfaces.IDaoInterfaceForActors;
 import com.movieproject.dao.interfaces.IDaoInterfaceForCategories;
 import com.movieproject.dao.interfaces.IDaoInterfaceForMovie;
@@ -30,6 +32,9 @@ public class MovieImpl {
 
 	@Autowired
 	MovieAppUtil movieAppUtils;
+	
+	@Autowired
+	RecommendationsImpl recommondationsImpl;
 
 	/*
 	 * private Integer movieid; private String moviename; private Integer
@@ -86,6 +91,8 @@ public class MovieImpl {
 		movieDao.delete(movieObject);
 
 		deleteMovieActorsEntries(movieid);
+		
+		recommondationsImpl.deleteRecommendationEntries(movieid);
 
 		return true;
 
