@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	
-	<div style="padding-top:160px;">
+	<div style="padding-top:160px; ; padding-bottom: 40px"">
 		<div class="col-md-12" style="padding-left:30px; font-weight: bold; font-size: 20px">
 			Top Rated Movies : 
 		</div>
@@ -80,7 +80,7 @@
 	</div>
 	
 	<div style="padding-top:40px;">
-		<div class="col-md-12" style="padding-bottom: 200px">
+		<div class="col-md-12" style="padding-bottom: 100px">
 			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[0] == null">
 				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[0].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[0].moviefilepath}}" height="275" width="225"/>
 			</div>
@@ -98,6 +98,36 @@
 			</div>
 			<div class="col-md-2" style="" ng-hide="movie_recentlywatched[5] == null">
 				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recentlywatched[5].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recentlywatched[5].moviefilepath}}" height="275" width="225"/>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div style="padding-top:40px; padding-bottom: 40px" ng-hide="movie_recommended[0] == null">
+		<div class="col-md-12" style="padding-left:30px; font-weight: bold; font-size: 20px; padding-bottom: 40px">
+			Friend's Recommended Movies : 
+		</div>
+	</div>
+	
+	<div style="padding-top:40px;">
+		<div class="col-md-12" style="padding-bottom: 200px">
+			<div class="col-md-2" style="" ng-hide="movie_recommended[0] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recommended[0].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recommended[0].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recommended[1] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recommended[1].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recommended[1].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recommended[2] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recommended[2].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recommended[2].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recommended[3] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recommended[3].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recommended[3].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recommended[4] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recommended[4].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recommended[4].moviefilepath}}" height="275" width="225"/>
+			</div>
+			<div class="col-md-2" style="" ng-hide="movie_recommended[5] == null">
+				<img class="featurette-image img-responsive center-block" ng-click="openMoviePage(movie_recommended[5].movieid)" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;" ng-src="{{movie_recommended[5].moviefilepath}}" height="275" width="225"/>
 			</div>
 		</div>
 	

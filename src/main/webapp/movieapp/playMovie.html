@@ -3,8 +3,8 @@
 		<div class="col-md-7">
 			<div class="col-md-12">
 				<!-- <img class="featurette-image img-responsive center-block" style="height: 400px; padding: 10px 10px 10px 10px; border: 1px solid black;" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> -->
-				<div style="height: 400px; padding: 10px 10px 10px 10px; border: 1px solid black;">
-					<embed-video href="{{movie_URL}}" width=685 height=375 ></embed-video>
+				<div style="height: 400px; width: 700px;padding: 10px 10px 10px 10px; border: 1px solid black;">
+					<embed-video href="{{movie_URL}}" width=675 height=375 ></embed-video>
 				</div>
 			</div>
 			
@@ -28,9 +28,41 @@
 					</a>
 				</div>
 				<div class="col-md-8">
-					
+					<div class="col-md-8">
+						<form>
+							<input type="text" class="form-control" placeholder="Recommendation Email" style="padding-left: 10px;"
+										name="rec_email" size="50" ng-model="rec_email" 
+										required/>
+							
+							<div class="error-container"
+								ng-show="signupform.rec_email.$dirty && signupform.rec_email.$invalid">
+								<small class="errorbox"
+									ng-show="signupform.signupform_name.$error.required">Recommendation Email is required</small> 
+									<small class="errorbox"
+									ng-show="signupform.signupform_name.$error.email">Recommendation Email id is invalid</small>
+							</div>
+							
+						</form>
+					</div>
+					<div class="col-md-4">
+						<div class="input-group" style="padding-left: 10px;">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="recommendMovie()">Recommend</button>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
+			
+			<div class="col-md-12">
+				<div class="input-group" style="padding-bottom: 5px; padding-top: 5px; text-align:center;">
+					<div class="errorbox" style="position:relative;padding-top:1%;padding-left:47%;">
+						{{ recerror }}
+					</div>
+					<div class="successbox" style="position:relative;padding-top:1%;padding-left:47%;">{{rec_success}}</div>
+				</div>
+			</div>
+			
 			
 			<div class="col-md-12"  style="padding-top:50px; padding-bottom:10px;">
 				<textarea name="usercomment" id="usercomment" class="form-control" rows="4" placeholder="Comment" ng-model="usercomment">
@@ -45,7 +77,7 @@
 				<div class="col-md-4"></div>
 			</div>
 			<div class="col-md-12"  style="padding-top:10px; padding-bottom:20px;">
-				<div class="errorbox" style="position:relative;padding-top:1%;padding-left:47%;">
+				<div class="" style="position:relative;padding-top:1%;padding-left:47%;">
 				<ul>
 					<li ng-repeat="err in error">{{ err }}</li>
 				</ul>
@@ -85,7 +117,7 @@
 			<div class="col-md-12">
 				<div class="col-md-3">
 				</div>
-				<div class="col-md-6" style="height: 300px; padding: 10px 10px 10px 10px; border: 1px solid black;">
+				<div class="col-md-6" style="height: 300px; width: 250px;padding: 10px 10px 10px 10px; border: 1px solid black;">
 					 <img ng-src="{{movie_filepath}}" height="275" width="225"/>
 				</div>
 				<div class="col-md-3">

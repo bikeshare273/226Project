@@ -298,6 +298,29 @@ movieapp.controller('homeUserController',
 		}
 	});
 	
+	//get friends recommended mvoies
+	var response = $http.post("../../api/v1/getrecommendedmovies", data,
+			{});
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				
+				$scope.movie_recommended = new Array();
+				for(var i=0; i<dataFromServer.length; i++){
+					console.log("getrecommended movie "+dataFromServer[i]);
+					$scope.movie_recommended[i] = dataFromServer[i];
+				}
+				
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+	
 	//on click on movie image open movie play page
 	$scope.openMoviePage = function(movieid) {
 	    	
@@ -881,6 +904,38 @@ movieapp.controller('playMovieController',
         $scope.queue.transactions.push(dataFromServer[i]);
     }*/
     $scope.itemsByPage=6;
+    
+    
+   //recommend movie
+    $scope.recommendMovie = function() {
+    	console.log("recommendMovie "+$scope.rec_email+" on "+movieid);
+    	var data = {
+    			movieid : movieid,
+    			username : $scope.rec_email
+    	};
+    	var response = $http.post("../../api/v1/addrecommendation", data,
+    			{});
+        
+    	
+    	response
+    			.success(function(dataFromServer, status,
+    					headers, config) {
+    				if(dataFromServer.successFlag){
+    					$scope.rec_success = "Recommendation sent to : "+$scope.rec_email;
+    				}else{
+    					$scope.recerror = "User doesn't exists";
+    				}
+    			});
+    	response.error(function(data, status, headers, config) {
+    		if (response.status === 401
+    				|| response.status === 400) {
+    			$scope.error = "Invalid request";
+    			$location.url('/');
+    			return $q.reject(response);
+    		}
+    	});
+    	
+    };
     
 	console.log('playMovieController end');
 });
