@@ -1,0 +1,50 @@
+<div ng-controller="userlistController">
+	
+	<div class="col-md-12"  style="padding-top:60px; padding-bottom:120px">
+	
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+			<table st-safe-src="queue.transactions" st-table="emptyArray" class="table table-striped" >
+				<thead>
+				<tr >
+					<th style="width:10%">No.</th>
+					<th style="width:40%">User Email</th>
+					<th style="width:40%">User Phone No.</th>
+					<th style="width:20%">Action</th>
+				</tr>
+				</thead>
+				<tbody ng-hide="isLoading">
+					<tr ng-repeat="row in emptyArray track by $index">
+						<td ng-hide="strikeUser[row.userid]">{{$index+1}}</td>
+						<td ng-hide="!strikeUser[row.userid]"><strike>{{$index+1}}</strike></td>
+						<td ng-hide="strikeUser[row.userid]">{{row.name}}</td>
+						<td ng-hide="!strikeUser[row.userid]"><strike>{{row.name}}</strike></td>
+						<td ng-hide="strikeUser[row.userid]">{{row.mobile_number}}</td>
+						<td ng-hide="!strikeUser[row.userid]"><strike>{{row.mobile_number}}</strike></td>
+						<td >
+						<div style="padding-top:1px;padding-bottom:1px">
+							<button class="btn btn-default" ng-click="deleteUser(row.userid)" ng-hide="strikeUser[row.userid]"><span style="color:red">Delete</span></button>
+							<button class="btn btn-default" ng-click="deleteUser(row.userid)" ng-hide="!strikeUser[row.userid]"
+							disabled><span style="color:red">Deleted</span></button>
+						</div style="padding-top:1px;padding-bottom:1px">
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5" class="text-center">
+							<div st-pagination="" st-items-by-page="itemsByPage" ></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class="col-md-2">
+		</div>
+		
+	</div>
+
+</div>
+
+<div style="padding-top: 50px;" ng-include src="'footer.html'"></div>

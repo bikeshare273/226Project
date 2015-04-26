@@ -213,7 +213,7 @@ public class MovieAppController extends WebMvcConfigurerAdapter {
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
 	@ResponseBody
-	public void deleteUser(SearchDTO searchDTO) {
+	public void deleteUser(@RequestBody SearchDTO searchDTO) {
 
 		Integer userid = Integer.parseInt(searchDTO.getSearchString());
 		

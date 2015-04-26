@@ -110,6 +110,11 @@ movieapp.config(function($routeProvider) {
 		controller : 'playMovieController'
 	})
 	
+	.when('/alluser', {
+		templateUrl : 'userlist.html',
+		controller : 'userlistController'
+	})
+	
 	// logout
 	.when('/logout', {
 		templateUrl : 'home.html',
@@ -940,6 +945,73 @@ movieapp.controller('playMovieController',
 	console.log('playMovieController end');
 });
 
+//delete user
+movieapp.controller('userlistController', function($scope, $http, $rootScope) {
+	// create a message to display in our view
+	console.log('userlistController');
+	$rootScope.hideUserNavTabs = true;
+    $rootScope.hideStaticTabs = true;
+    $rootScope.hideAdminNavTabs = false;
+   
+    $scope.strikeUser = new Array();
+    $scope.itemsByPage=10;
+    
+	var data = {};
+	$scope.queue = {
+            transactions: []
+        };
+	
+	var response = $http.post("../../api/v1/fetchallusers", data,
+			{});
+	
+    
+	response
+			.success(function(dataFromServer, status,
+					headers, config) {
+				console.log(dataFromServer);
+				for(var i=0; i<dataFromServer.length; i++){
+					$scope.queue.transactions.push(dataFromServer[i]);
+					$scope.strikeUser[dataFromServer[i].userid] = false;
+				}
+			});
+	response.error(function(data, status, headers, config) {
+		if (response.status === 401
+				|| response.status === 400) {
+			$scope.loginform_error = "Invalid request";
+			$location.url('/');
+			return $q.reject(response);
+		}
+	});
+	
+	//delete user
+    $scope.deleteUser = function(userid) {
+    	console.log("deleteUser "+userid);
+    	var data = {
+    			searchString : userid
+    	};
+    	var response = $http.post("../../api/v1/deleteuser", data,
+    			{});
+        
+    	
+    	response
+    			.success(function(dataFromServer, status,
+    					headers, config) {
+    				$scope.strikeUser[userid] = true;
+    			});
+    	response.error(function(data, status, headers, config) {
+    		if (response.status === 401
+    				|| response.status === 400) {
+    			$scope.error = "Invalid request";
+    			$location.url('/');
+    			return $q.reject(response);
+    		}
+    	});
+    	
+    };
+	
+});
+
+
 //create the controller and inject Angular's $scope
 movieapp.controller('logoutController', function($scope, $http, $rootScope) {
 	// create a message to display in our view
@@ -958,7 +1030,6 @@ movieapp.controller('logoutController', function($scope, $http, $rootScope) {
 				console.log(dataFromServer);
 				if (dataFromServer == true) {
 					console.log("logout sucessfully");
-					 
 				}
 			});
 	response.error(function(data, status, headers, config) {
@@ -970,3 +1041,4 @@ movieapp.controller('logoutController', function($scope, $http, $rootScope) {
 		}
 	});
 });
+
